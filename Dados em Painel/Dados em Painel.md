@@ -32,7 +32,20 @@ e no ano de 74 obtivemos 173 entrevistadas, se somarmos os demais anos iremos ob
 Nosso modelo é significativo, porque temos Prob > F = 0.0000 . Todavia, nem todas nossas variáveis são
 significativas ao nível de significância de 10%.
 
-![2](https://github.com/HenrySchall/Stata/assets/96027335/ce057eb6-1b1d-4948-9010-a2b76b4b17ec)
+kids| Coefficient|P>(t)  
+:---:|:---:|:---:
+educ|-.1428788|0.000    
+age|.5624223|0.000     
+age2|-.0060917|0.000    
+black|.977559|0.000    
+east|.2362931|0.078    
+northcen|.3847487|0.002   
+west|.2447027|0.147    
+farm|-.054186|0.715    
+othrural|-.1670751|0.346   
+town|.0842369|0.503    
+smcity|.1830768|0.259   
+_cons|-8.487543|
 
 - educ = É significativa e possui efeito *negativo* na variável dependente, ou seja, mulheres mais educadas, controlado
 pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. 
