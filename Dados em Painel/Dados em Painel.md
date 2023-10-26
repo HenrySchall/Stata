@@ -48,7 +48,7 @@ smcity|.1830768|0.259
 _cons|-8.487543|
 
 - educ = É significativa e possui efeito *negativo* na variável dependente, ou seja, mulheres mais educadas, controlado
-pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. 
+pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. **DÚVIDA** interpretacaoesta correta?
 - age = É significativa e possui efeito *positivo* na variável dependente, controlado pelos outros fatores
 - age2 = É significativa e possui efeito negativo na variável dependente, controlado pelos outros fatores
 - black = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
@@ -59,10 +59,9 @@ pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, c
 - othrural = Não é significativa
 - town = Não é significativa
 - smcity = Não é significativa
-  
-**DÚVIDA ~~É esperado, que ao longo do tempo ocorra uma queda estrutural, no número de filhos por mulher
-Iremos retirar uma das dummies de intercepto temporais (no nosso exemplo y72), para evitar a multicolinealidade~~
-usamos as dummies pra ver o efeito causal isolado de cada ano?
+
+**DÚVIDA**
+Essa base nos permite fazer diversas indagações, sobre o efeito da fecundidade em cada ano, por exemplo será que y76 é maior que y80?. Por isso usaremos dummies estruturais temporais, buscando ver o efeito causal isolado de cada ano.
 
 ```r
 reg kids educ age age2 black east northcen west farm othrural town smcity y74 y76 y78 y80 y82 y84
@@ -107,16 +106,24 @@ Nosso modelo é significativo, porque temos Prob > F = 0.0000 e todas as variáv
 - Salários de 85 são maiores que os de 78?
 - Esse efeito da educação é maior em 78 ou em 85?
 
+**DÚVIDA**
 Por isso novamente voltaremos à usar dummies para quantificar esse efeito
 
 ```r
 reg lwage y85 educ y85educ exper expersq union female y85fem
 ```
 
-**DÚVIDA ~~É esperado, que ao longo do tempo ocorra uma queda estrutural, no número de filhos por mulher
-Iremos retirar uma das dummies de intercepto temporais (no nosso exemplo y72), para evitar a multicolinealidade~~
-usamos as dummies pra ver o efeito causal isolado de cada ano?
+**DÚVIDA** -> Porque nao fizemos isso no exemplo anterior
+As dummies multiplicativas serão usadas para testar o efeito de alteração das variáveis durante y78 e y85
 
+![imag](https://github.com/HenrySchall/Stata/assets/96027335/689ef635-79c4-498c-94be-8dcd7e198770)
+
+Podemos notar que a dummy de y85 não é significativa, ou seja, controlado pelos outros fatores os salários de y78 e y85
+são estatisticamente iguais.
+
+- Analisando à variável educ e y85educ. Passamos a decompor à variável, ou seja, controlado pelos outros fatores o aumento de 1 ano de estudo em y78, aumenta os salários em 7,47%, de tal forma, que no ano de y85 esse efeito é 1,85% maior (aumento do efeito de um ano para o outro, ou seja, o prêmio).
+
+ - Analisando à variável female e y85fem. Passamos a decompor à variável, ou seja, controlado pelos outros fatores a diferença salarial em y78, é de -31,67%, de tal forma, que no ano de y85 esse efeito é 8,50% menor (31,67% - 8,50% = -23,17%, ou seja, diminuição do efeito de um ano para o outro).
 
 
 
