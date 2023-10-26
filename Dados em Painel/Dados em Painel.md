@@ -15,7 +15,7 @@ reg kids educ age age2 black east northcen west farm othrural town smcity
 ```
 *Resultados*:
 
-![Captura de tela 2023-10-25 160334](https://github.com/HenrySchall/Stata/assets/96027335/c391791c-29b2-40d7-a1c4-0fb49ac271fb)
+![novo1](https://github.com/HenrySchall/Stata/assets/96027335/22361499-ca88-406c-ac28-ed6b1334e8ea)
 
 Nessa regressão temos 1.129 observações, se quissemos saber quantas observações temos
 em cada ano dariamos:
@@ -25,7 +25,7 @@ sort year
 by year: tab kids (
 #kids é nossa variável dependente, poderiamos pegar qualquer variável
 ```
-![3](https://github.com/HenrySchall/Stata/assets/96027335/bad65065-3312-45f0-8a46-2c3e86f6ca47)
+![novo2](https://github.com/HenrySchall/Stata/assets/96027335/5672bab5-815c-4333-8893-a009961878b2)
 
 Pegando os anos de 72 e 74 como exemplo. Podemos ver que no ano de 72, obtivemos 156 entrevistas 
 e no ano de 74 obtivemos 173 entrevistadas, se somarmos os demais anos iremos obter as 1.129 observações.
@@ -54,7 +54,7 @@ usamos as dummies pra ver o efeito causal isolado de cada ano?
 ```r
 reg kids educ age age2 black east northcen west farm othrural town smcity y74 y76 y78 y80 y82 y84
 ```
-![Captura de tela 2023-10-26 090141](https://github.com/HenrySchall/Stata/assets/96027335/16ff662c-3aad-478e-abc0-fafacb54d862)
+![Captura de tela 2023-10-26 090141](https://github.com/HenrySchall/Stata/assets/96027335/a46f4f3b-7e82-493c-b85b-75db87e6cd54)
 
 - y74 = Não significativa e possui efeito *positivo*
 - y76 = Não significativa e possui efeito negativo
@@ -74,18 +74,19 @@ Carregar base -> CPS78_85.DTA
 ```r
 sum
 ```
-![1](https://github.com/HenrySchall/Stata/assets/96027335/e24fa4b2-bc47-4fce-b4d3-1820fdf03705)
+
+![1](https://github.com/HenrySchall/Stata/assets/96027335/39ba4008-23ab-4681-94f1-5bc048e2d4dd)
 
 Para analisarmos as observações em cada ano, damos: 
 ```r
 tab year
 ```
-![2](https://github.com/HenrySchall/Stata/assets/96027335/ab18852c-a719-4c9a-a950-f3045c6ca07e)
+![2](https://github.com/HenrySchall/Stata/assets/96027335/5ab82a94-afd5-42e9-92c5-97c0db330ab2)
 
 ```
 reg lwage educ exper expersq union female
 ```
-![3](https://github.com/HenrySchall/Stata/assets/96027335/6a4acd5b-bee6-4c95-b8fb-009d56cab63f)
+![3](https://github.com/HenrySchall/Stata/assets/96027335/b0f14b0e-e25d-401a-b82b-3af2b350dc1c)
 
 Nosso modelo é significativo, porque temos Prob > F = 0.0000 e todas as variáveis são significativas estatisticamente
 (P>|t| = 0.000). Pegando a variável educ como exemplo, podemos dizer que o aumento de 1 ano de educação, controlado pelos outros fatores, leva ao aumento de salário de aproximadamente 8,84%. Essa base de dados nos permite realizar várias perguntas como:
