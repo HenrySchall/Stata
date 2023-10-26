@@ -141,9 +141,25 @@ sum
 ![Imag2](https://github.com/HenrySchall/Stata/assets/96027335/d7b26c71-825c-414c-b976-bfa2ae16608c)
 
 ```r
+#pegando o preço dos imóveis e regredindo com a dummy de localização em 81
 reg rprice nearinc if year==1981
 ```
 ![imag3](https://github.com/HenrySchall/Stata/assets/96027335/71990ee0-1ecd-4ff4-9e1b-4f4f634ac1d7)
+
+Nosso modelo será significativo do ponto de vista global e a nossa variável nearinc é significativa e negativa, ou seja, em
+81, os imóveis que estão localizados próximos a construção do centro de tratamento de lixo possuem preços menores, em média 30.688 doláres, que os imóveis afastados da construção do centro de tratamento de lixo.
+
+- Pergunta: *Essa diferença de preço é causada pela construção do centro de tratamento de lixo?*
+
+```r
+#pegando o preço dos imóveis e regredindo com a dummy de localização em 78
+reg rprice nearinc if year==1978
+```
+
+![imagg](https://github.com/HenrySchall/Stata/assets/96027335/9ad2b6c6-aa1a-4621-81c7-abc58a9f17a4)
+
+Nossa resposta será **Não**, porque vemos o mesmo efeito em 78, muito antes da construção do centro de tratamento de lixo.
+
 
 
 
