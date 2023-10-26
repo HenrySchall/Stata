@@ -1,0 +1,1338 @@
+
+
+reg lwage y85 educ y85educ exper expersq union female y85fem
+
+      Source |       SS           df       MS      Number of obs   =     1,084
+-------------+----------------------------------   F(8, 1075)      =     99.80
+       Model |  135.992074         8  16.9990092   Prob > F        =    0.0000
+    Residual |  183.099094     1,075  .170324738   R-squared       =    0.4262
+-------------+----------------------------------   Adj R-squared   =    0.4219
+       Total |  319.091167     1,083   .29463635   Root MSE        =     .4127
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y85 |   .1178062   .1237817     0.95   0.341     -.125075    .3606874
+        educ |   .0747209   .0066764    11.19   0.000     .0616206    .0878212
+     y85educ |   .0184605   .0093542     1.97   0.049      .000106     .036815
+       exper |   .0295843   .0035673     8.29   0.000     .0225846     .036584
+     expersq |  -.0003994   .0000775    -5.15   0.000    -.0005516   -.0002473
+       union |   .2021319   .0302945     6.67   0.000     .1426888    .2615749
+      female |  -.3167086   .0366215    -8.65   0.000    -.3885663    -.244851
+      y85fem |    .085052    .051309     1.66   0.098    -.0156251     .185729
+       _cons |   .4589329   .0934485     4.91   0.000     .2755707     .642295
+------------------------------------------------------------------------------
+
+* Como a dummy não é significativa, podemos concluir que controlado pelos outros fatores, os salarios de 78 e 85 são estatiscamente iguais
+* Controlado pelos outros fatores um aumento de um ano de estudo em 78 aumenta os salários em torno de 7,4%, de tal forma, que no ano de 85 esse efeito é 1,8% maior
+* 7,4% + 1,8% = 9% feito final do aumento de um ano de estudo para 85 (1,8% -> prêmio do retorno de educação).
+
+* Em 78 controlado pelos outros fatores, o diferencial de salários entre homens e mulheres eram 31% menores do que os dos homens, todavia esse percentual diminui em relação a 85 (y85fem é positivo). As mulheres continuam a ganhar menos que os homens, mas a diferença diminuiu
+* 31% + 8,5% = -23% -> feito final do aumento de um ano de estudo para 85 (1,8% -> prêmio do retorno de educação). Agora as mulheres ganham 23% a menos que os homens.
+
+********************************************
+** Estimador de diferencas e indiferencas **
+********************************************
+
+clear
+
+* Carregar Base -> KIELMC.DTA"
+* Assunto da Base -> Como a instalação de um incinerador de lixo, afetou o preço dos imóveis
+
+tab year
+
+    1978 or |
+       1981 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1978 |        179       55.76       55.76
+       1981 |        142       44.24      100.00
+------------+-----------------------------------
+      Total |        321      100.00
+
+sum
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        year |        321    1979.327    1.492329       1978       1981
+         age |        321    18.00935    32.56585          0        189
+       agesq |        321    1381.567    4801.789          0      35721
+         nbh |        321    2.208723    2.164353          0          6
+         cbd |        321    15822.43    8967.106       1000      35000
+-------------+---------------------------------------------------------
+       intst |        321    16442.37    9033.131       1000      34000
+      lintst |        321    9.480513    .7771655     6.9078     10.434
+       price |        321    96100.66    43223.73      26000     300000
+       rooms |        321     6.58567    .9012042          4         10
+        area |        321    2106.729    694.9579        735       5136
+-------------+---------------------------------------------------------
+        land |        321    39629.89    39514.39       1710     544500
+       baths |        321    2.339564    .7705265          1          4
+        dist |        321    20715.58    8508.184       5000      40000
+       ldist |        321    9.837414    .4783831   8.517193   10.59663
+        wind |        321    6.978193    2.665079          3         11
+-------------+---------------------------------------------------------
+      lprice |        321    11.37812    .4381744   10.16585   12.61154
+         y81 |        321    .4423676    .4974428          0          1
+       larea |        321    7.597232    .3407226   6.599871    8.54403
+       lland |        321    10.30186    .8017517   7.444249   13.20762
+    y81ldist |        321    4.342579    4.892513          0   10.56875
+-------------+---------------------------------------------------------
+    lintstsq |        321    90.48224    14.06646    47.7177   108.8684
+     nearinc |        321    .2990654    .4585634          0          1
+    y81nrinc |        321    .1246106    .3307925          0          1
+      rprice |        321    83721.36    33118.79      26000     300000
+     lrprice |        321    11.26138    .3878996   10.16585   12.61154
+
+edit
+
+reg rprice nearinc if year==1981
+
+      Source |       SS           df       MS      Number of obs   =       142
+-------------+----------------------------------   F(1, 140)       =     27.73
+       Model |  2.7059e+10         1  2.7059e+10   Prob > F        =    0.0000
+    Residual |  1.3661e+11       140   975815048   R-squared       =    0.1653
+-------------+----------------------------------   Adj R-squared   =    0.1594
+       Total |  1.6367e+11       141  1.1608e+09   Root MSE        =     31238
+
+------------------------------------------------------------------------------
+      rprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     nearinc |  -30688.27   5827.709    -5.27   0.000    -42209.97   -19166.58
+       _cons |   101307.5   3093.027    32.75   0.000     95192.43    107422.6
+------------------------------------------------------------------------------
+
+* os imoveis em 81, que estão localizados próximos do tratamento de lixo tem um valor abaixo em 30 mil dolares em reelação aos imóveis localizados mais afastados
+
+reg rprice nearinc if year==1978
+
+      Source |       SS           df       MS      Number of obs   =       179
+-------------+----------------------------------   F(1, 177)       =     15.74
+       Model |  1.3636e+10         1  1.3636e+10   Prob > F        =    0.0001
+    Residual |  1.5332e+11       177   866239953   R-squared       =    0.0817
+-------------+----------------------------------   Adj R-squared   =    0.0765
+       Total |  1.6696e+11       178   937979126   Root MSE        =     29432
+
+------------------------------------------------------------------------------
+      rprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     nearinc |  -18824.37   4744.594    -3.97   0.000    -28187.62   -9461.117
+       _cons |   82517.23    2653.79    31.09   0.000     77280.09    87754.37
+------------------------------------------------------------------------------
+
+* junção dos dois anos
+reg rprice y81 nearinc y81nri
+
+      Source |       SS           df       MS      Number of obs   =       321
+-------------+----------------------------------   F(3, 317)       =     22.25
+       Model |  6.1055e+10         3  2.0352e+10   Prob > F        =    0.0000
+    Residual |  2.8994e+11       317   914632739   R-squared       =    0.1739
+-------------+----------------------------------   Adj R-squared   =    0.1661
+       Total |  3.5099e+11       320  1.0969e+09   Root MSE        =     30243
+
+------------------------------------------------------------------------------
+      rprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y81 |   18790.29   4050.065     4.64   0.000     10821.88    26758.69
+     nearinc |  -18824.37   4875.322    -3.86   0.000    -28416.45   -9232.293
+    y81nrinc |   -11863.9   7456.646    -1.59   0.113    -26534.67    2806.867
+       _cons |   82517.23    2726.91    30.26   0.000      77152.1    87882.36
+------------------------------------------------------------------------------
+
+reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
+
+      Source |       SS           df       MS      Number of obs   =       321
+-------------+----------------------------------   F(10, 310)      =     60.19
+       Model |  2.3167e+11        10  2.3167e+10   Prob > F        =    0.0000
+    Residual |  1.1932e+11       310   384905860   R-squared       =    0.6600
+-------------+----------------------------------   Adj R-squared   =    0.6491
+       Total |  3.5099e+11       320  1.0969e+09   Root MSE        =     19619
+
+------------------------------------------------------------------------------
+      rprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y81 |   13928.48   2798.747     4.98   0.000     8421.533    19435.42
+     nearinc |   3780.337   4453.415     0.85   0.397    -4982.408    12543.08
+    y81nrinc |  -14177.93   4987.267    -2.84   0.005    -23991.11   -4364.759
+         age |   -739.451   131.1272    -5.64   0.000    -997.4629   -481.4391
+       agesq |    3.45274   .8128214     4.25   0.000     1.853395    5.052084
+       intst |  -.5386352   .1963359    -2.74   0.006    -.9249548   -.1523157
+        land |   .1414196   .0310776     4.55   0.000     .0802698    .2025693
+        area |   18.08621   2.306064     7.84   0.000     13.54869    22.62373
+       rooms |   3304.227   1661.248     1.99   0.048     35.47904    6572.974
+       baths |   6977.317   2581.321     2.70   0.007     1898.191    12056.44
+       _cons |   13807.67   11166.59     1.24   0.217    -8164.239    35779.57
+------------------------------------------------------------------------------
+
+* y81nrinc é o efeito da instalcao do tratemento de lixo, o valor deve ser em torno desse valor
+
+reg lrprice y81 nearinc y81nrinc age agesq intst land area rooms baths
+
+      Source |       SS           df       MS      Number of obs   =       321
+-------------+----------------------------------   F(10, 310)      =     83.88
+       Model |   35.156239        10   3.5156239   Prob > F        =    0.0000
+    Residual |  12.9929044       310  .041912595   R-squared       =    0.7302
+-------------+----------------------------------   Adj R-squared   =    0.7214
+       Total |  48.1491434       320  .150466073   Root MSE        =    .20473
+
+------------------------------------------------------------------------------
+     lrprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y81 |   .1387106   .0292051     4.75   0.000     .0812453    .1961758
+     nearinc |  -.0346379   .0464717    -0.75   0.457    -.1260777    .0568019
+    y81nrinc |  -.0925171   .0520424    -1.78   0.076    -.1949182    .0098839
+         age |  -.0085143   .0013683    -6.22   0.000    -.0112067    -.005822
+       agesq |   .0000365   8.48e-06     4.31   0.000     .0000198    .0000532
+       intst |  -3.55e-06   2.05e-06    -1.73   0.084    -7.58e-06    4.78e-07
+        land |   9.22e-07   3.24e-07     2.84   0.005     2.84e-07    1.56e-06
+        area |    .000184   .0000241     7.64   0.000     .0001366    .0002313
+       rooms |   .0527622   .0173352     3.04   0.003     .0186526    .0868718
+       baths |   .1030369   .0269362     3.83   0.000     .0500359    .1560379
+       _cons |   10.37055   .1165241    89.00   0.000     10.14127    10.59983
+------------------------------------------------------------------------------
+
+**********************
+** Segundo Exemplo ***
+**********************
+
+clear
+
+* Carregar Base -> INJURY.DTA"
+
+* Resumo base: Efeito de uma mudança na regra de auxilio de compensação por acidente de trabalho. Até julho de 80 havia um limite em relaçãoa renda do indiividuo. Indivíudos, que tinha renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
+
+reg ldurat afchnge highearn afhigh
+
+      Source |       SS           df       MS      Number of obs   =     7,150
+-------------+----------------------------------   F(3, 7146)      =     38.34
+       Model |  193.919855         3  64.6399516   Prob > F        =    0.0000
+    Residual |  12047.1908     7,146  1.68586493   R-squared       =    0.0158
+-------------+----------------------------------   Adj R-squared   =    0.0154
+       Total |  12241.1107     7,149  1.71228293   Root MSE        =    1.2984
+
+------------------------------------------------------------------------------
+      ldurat | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     afchnge |   .0236351   .0397008     0.60   0.552    -.0541902    .1014603
+    highearn |   .2151955   .0433612     4.96   0.000     .1301948    .3001963
+      afhigh |   .1883498    .062794     3.00   0.003      .065255    .3114445
+       _cons |   1.199336   .0271091    44.24   0.000     1.146194    1.252478
+------------------------------------------------------------------------------
+
+* ldurant é o periodo de duração do afastamento
+
+* afhigh é significativa e positiva, ou seja controlados pelos outros fatores, antes da mudanda da legislação os indivíduos, que tinham renda mais alta, passaram a se afasta um numero de dias maior, ou seja, um aumento de 18% no tempo de duração do afastamento.
+
+reg ldurat afchnge highearn afhigh male married indust injtype
+
+      Source |       SS           df       MS      Number of obs   =     6,824
+-------------+----------------------------------   F(7, 6816)      =     21.03
+       Model |  244.707976         7  34.9582823   Prob > F        =    0.0000
+    Residual |  11329.2752     6,816  1.66215892   R-squared       =    0.0211
+-------------+----------------------------------   Adj R-squared   =    0.0201
+       Total |  11573.9832     6,823   1.6963188   Root MSE        =    1.2892
+
+------------------------------------------------------------------------------
+      ldurat | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     afchnge |   .0219922     .04015     0.55   0.584    -.0567144    .1006989
+    highearn |   .1797779   .0469284     3.83   0.000     .0877835    .2717723
+      afhigh |   .2151064    .064014     3.36   0.001     .0896191    .3405938
+        male |  -.0862377   .0402554    -2.14   0.032    -.1651509   -.0073244
+     married |   .1183969   .0352929     3.35   0.001     .0492118    .1875821
+      indust |   .0338827   .0178639     1.90   0.058    -.0011361    .0689016
+     injtype |   .0353488     .01031     3.43   0.001     .0151379    .0555598
+       _cons |   .9597444   .0735133    13.06   0.000     .8156355    1.103853
+------------------------------------------------------------------------------
+
+**********************************
+**** Painel com dois periodos ****
+**********************************
+
+* Carregar Base -> CRIME2.DTA"
+
+reg crmrte unem if year==87
+
+      Source |       SS           df       MS      Number of obs   =        46
+-------------+----------------------------------   F(1, 44)        =      1.48
+       Model |  1775.90927         1  1775.90927   Prob > F        =    0.2297
+    Residual |  52674.6465        44  1197.15106   R-squared       =    0.0326
+-------------+----------------------------------   Adj R-squared   =    0.0106
+       Total |  54450.5558        45  1210.01235   Root MSE        =      34.6
+
+------------------------------------------------------------------------------
+      crmrte | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -4.161134   3.416456    -1.22   0.230    -11.04655     2.72428
+       _cons |   128.3781   20.75663     6.18   0.000     86.54589    170.2104
+------------------------------------------------------------------------------
+
+* crmrte = taxa de crime
+* unem = desemprego
+
+* Coeficientes: 
+* + diretamente proporcionais -> crmrte (+) & unem (+) = aumento do desemprego gera aumento de crimes 
+* - inversamente proporcionais -> crmrte (+) & unem (-) = aumento do desemprego não gera aumento de crimes
+
+* N�o faz sentido o nosso modelo, então podemos imaginar, que há presença de vi�s
+ 
+reg crmrte d87 unem
+
+      Source |       SS           df       MS      Number of obs   =        92
+-------------+----------------------------------   F(2, 89)        =      0.55
+       Model |  989.717223         2  494.858612   Prob > F        =    0.5788
+    Residual |  80055.7995        89  899.503365   R-squared       =    0.0122
+-------------+----------------------------------   Adj R-squared   =   -0.0100
+       Total |  81045.5167        91  890.610074   Root MSE        =    29.992
+
+------------------------------------------------------------------------------
+      crmrte | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         d87 |   7.940416   7.975325     1.00   0.322    -7.906385    23.78722
+        unem |   .4265473   1.188279     0.36   0.720    -1.934538    2.787633  /*viesado*/
+       _cons |   93.42025   12.73947     7.33   0.000     68.10719    118.7333
+------------------------------------------------------------------------------
+
+* unem (desemprego), agora afeta positivamente o desemprego (esperado),todavia ela é não significativa, ou seja, há variáveis omitidas no erro e elas são coorrelacionadas com o desemprego (Não posso estimar por MQO) -> usar estimador de primeiras diferenças
+
+reg ccrmrte cunem
+   
+      Source |       SS           df       MS      Number of obs   =        46
+-------------+----------------------------------   F(1, 44)        =      6.38
+       Model |  2566.43744         1  2566.43744   Prob > F        =    0.0152
+    Residual |  17689.5497        44  402.035219   R-squared       =    0.1267
+-------------+----------------------------------   Adj R-squared   =    0.1069
+       Total |  20255.9871        45  450.133047   Root MSE        =    20.051
+
+------------------------------------------------------------------------------
+     ccrmrte | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       cunem |   2.217999   .8778658     2.53   0.015     .4487771    3.987222
+       _cons |    15.4022   4.702117     3.28   0.002      5.92571     24.8787
+------------------------------------------------------------------------------
+
+* Condicionado pelas outras variavies explicativas iguas a 0, a variação da variável dependente é igual a 15, ou seja, mesmo com o desemprego não variando ocorre um aumento nas ocorrências de crimininalidade para cada 1000 habitantes.
+* Quando o desemprego varia em um ponto percentual a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 para cada 1000 habitantes.
+
+************************
+*** Segundo Exemplo ****
+************************
+
+* Carregar Base -> RAFFIC1.DTA" = efeitos sobre a lei seca 
+
+clear 
+sum dthrte85 dthrte90
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    dthrte85 |         51         2.7    .6033241        1.9        4.4
+    dthrte90 |         51    2.154902    .5150976        1.3        3.6
+
+* dthrt -> taxa média de mortes, ocorreu queda, porque?
+	
+sum cdthrte
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     cdthrte |         51    -.545098    .3585045       -1.9         .3
+
+sum open85 open90 copen
+* copen -> variação da dummy
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      open85 |         51     .372549    .4882944          0          1
+      open90 |         51    .4313725     .500196          0          1
+       copen |         51    .0588235    .2376354          0          1
+
+reg cdthrte copen cadmn
+
+      Source |       SS           df       MS      Number of obs   =        51
+-------------+----------------------------------   F(2, 48)        =      3.23
+       Model |  .762579785         2  .381289893   Prob > F        =    0.0482
+    Residual |  5.66369475        48  .117993641   R-squared       =    0.1187
+-------------+----------------------------------   Adj R-squared   =    0.0819
+       Total |  6.42627453        50  .128525491   Root MSE        =     .3435
+
+------------------------------------------------------------------------------
+     cdthrte | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       copen |  -.4196787   .2055948    -2.04   0.047    -.8330547   -.0063028
+       cadmn |  -.1506024   .1168223    -1.29   0.204    -.3854894    .0842846
+       _cons |  -.4967872   .0524256    -9.48   0.000    -.6021959   -.3913784
+------------------------------------------------------------------------------
+
+* A primeira variável é singnificativa e a segunda varíável não é significativa, isso sugere que a legislação da lei seca, realmente diminui a mortalidade no trânsito e a outra legislação não reduz.
+
+*******************************************************
+** Estimadores de Efeitos Fixos & Efeitos Aleatórios **
+*******************************************************
+
+clear
+
+* Carregar Base -> Jtrain.DTA"
+
+* Acompanhamento de 54 empresas, as mesmas durantes os três anos, que mostrar qual a taxa de descarte dos produtos, num cenário onde há subsídio  
+
+* lscrap taxa de descarte
+* grant é o subsídio com treinamento
+* grant -> dummy para 88
+* grant_1 -> dummy para 89
+
+reg lscrap d88 d89 grant grant_1
+
+      Source |       SS           df       MS      Number of obs   =       162
+-------------+----------------------------------   F(4, 157)       =      0.69
+       Model |  6.15830732         4  1.53957683   Prob > F        =    0.5989
+    Residual |  349.586781       157   2.2266674   R-squared       =    0.0173
+-------------+----------------------------------   Adj R-squared   =   -0.0077
+       Total |  355.745089       161  2.20959682   Root MSE        =    1.4922
+
+------------------------------------------------------------------------------
+      lscrap | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         d88 |  -.2393704   .3108639    -0.77   0.442    -.8533854    .3746446
+         d89 |  -.4965236   .3379281    -1.47   0.144    -1.163996    .1709483
+       grant |   .2000197   .3382846     0.59   0.555    -.4681564    .8681958
+     grant_1 |   .0489357   .4360663     0.11   0.911    -.8123778    .9102492
+       _cons |   .5974341    .203063     2.94   0.004     .1963462    .9985219
+------------------------------------------------------------------------------
+
+* grant e grant_1 são positivos, mas não significativos. Existe alguma coisa que estã viesando o resultado, poderiamos dizer que existe diferenças entre as empresas nas suas características organizacionais, de forma que os descartes sejam diferentes 
+
+* Esse se eu considerar isso como um efeito fixo? fe = efeito fixo
+
+iis fcode
+tis year
+
+xtreg lscrap d88 d89 grant grant_1, fe
+
+Fixed-effects (within) regression               Number of obs     =        162
+Group variable: fcode                           Number of groups  =         54
+
+R-squared:                                      Obs per group:
+     Within  = 0.2010                                         min =          3
+     Between = 0.0079                                         avg =        3.0
+     Overall = 0.0068                                         max =          3
+
+                                                F(4,104)          =       6.54
+corr(u_i, Xb) = -0.0714                         Prob > F          =     0.0001
+
+------------------------------------------------------------------------------
+      lscrap | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         d88 |  -.0802157   .1094751    -0.73   0.465     -.297309    .1368776
+         d89 |  -.2472028   .1332183    -1.86   0.066    -.5113797    .0169741
+       grant |  -.2523149    .150629    -1.68   0.097    -.5510178    .0463881
+     grant_1 |  -.4215895      .2102    -2.01   0.047    -.8384239   -.0047551
+       _cons |   .5974341   .0677344     8.82   0.000     .4631142    .7317539
+-------------+----------------------------------------------------------------
+     sigma_u |   1.438982
+     sigma_e |  .49774421
+         rho |  .89313867   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(53, 104) = 24.66                    Prob > F = 0.0000
+
+* Controlado por outos fatores as taxas de descarte de 88 não são diferentes de em 77 estatiscamente falando, mas as taxas de descarte de 89 são menores do que em 88
+
+* Controladas por outros fatores, os subsidios diminuem as taxas de descarte
+
+**********
+** LSDV **
+**********
+
+* criando uma dummy para cada empresa 
+tabulate fcode, generate(dum)
+
+  firm code |
+     number |      Freq.     Percent        Cum.
+------------+-----------------------------------
+     410032 |          3        0.64        0.64
+     410440 |          3        0.64        1.27
+     410495 |          3        0.64        1.91
+     410500 |          3        0.64        2.55
+     410501 |          3        0.64        3.18
+     410509 |          3        0.64        3.82
+     410513 |          3        0.64        4.46
+     410517 |          3        0.64        5.10
+     410518 |          3        0.64        5.73
+     410521 |          3        0.64        6.37
+     410523 |          3        0.64        7.01
+     410529 |          3        0.64        7.64
+     410531 |          3        0.64        8.28
+     410533 |          3        0.64        8.92
+     410535 |          3        0.64        9.55
+     410536 |          3        0.64       10.19
+     410538 |          3        0.64       10.83
+     410540 |          3        0.64       11.46
+     410544 |          3        0.64       12.10
+     410546 |          3        0.64       12.74
+     410547 |          3        0.64       13.38
+     410556 |          3        0.64       14.01
+     410560 |          3        0.64       14.65
+     410561 |          3        0.64       15.29
+     410562 |          3        0.64       15.92
+     410563 |          3        0.64       16.56
+     410564 |          3        0.64       17.20
+     410565 |          3        0.64       17.83
+     410566 |          3        0.64       18.47
+     410567 |          3        0.64       19.11
+     410569 |          3        0.64       19.75
+     410571 |          3        0.64       20.38
+     410577 |          3        0.64       21.02
+     410586 |          3        0.64       21.66
+     410591 |          3        0.64       22.29
+     410592 |          3        0.64       22.93
+     410593 |          3        0.64       23.57
+     410596 |          3        0.64       24.20
+     410603 |          3        0.64       24.84
+     410604 |          3        0.64       25.48
+     410606 |          3        0.64       26.11
+     410609 |          3        0.64       26.75
+     410612 |          3        0.64       27.39
+     410626 |          3        0.64       28.03
+     410627 |          3        0.64       28.66
+     410629 |          3        0.64       29.30
+     410635 |          3        0.64       29.94
+     410636 |          3        0.64       30.57
+     410639 |          3        0.64       31.21
+     410640 |          3        0.64       31.85
+     410641 |          3        0.64       32.48
+     410642 |          3        0.64       33.12
+     410649 |          3        0.64       33.76
+     410653 |          3        0.64       34.39
+     410665 |          3        0.64       35.03
+     410679 |          3        0.64       35.67
+     410680 |          3        0.64       36.31
+     410685 |          3        0.64       36.94
+     410686 |          3        0.64       37.58
+     418006 |          3        0.64       38.22
+     418007 |          3        0.64       38.85
+     418008 |          3        0.64       39.49
+     418011 |          3        0.64       40.13
+     418013 |          3        0.64       40.76
+     418014 |          3        0.64       41.40
+     418021 |          3        0.64       42.04
+     418024 |          3        0.64       42.68
+     418035 |          3        0.64       43.31
+     418036 |          3        0.64       43.95
+     418045 |          3        0.64       44.59
+     418046 |          3        0.64       45.22
+     418051 |          3        0.64       45.86
+     418052 |          3        0.64       46.50
+     418054 |          3        0.64       47.13
+     418065 |          3        0.64       47.77
+     418066 |          3        0.64       48.41
+     418076 |          3        0.64       49.04
+     418083 |          3        0.64       49.68
+     418084 |          3        0.64       50.32
+     418091 |          3        0.64       50.96
+     418097 |          3        0.64       51.59
+     418098 |          3        0.64       52.23
+     418107 |          3        0.64       52.87
+     418109 |          3        0.64       53.50
+     418118 |          3        0.64       54.14
+     418124 |          3        0.64       54.78
+     418125 |          3        0.64       55.41
+     418126 |          3        0.64       56.05
+     418140 |          3        0.64       56.69
+     418147 |          3        0.64       57.32
+     418163 |          3        0.64       57.96
+     418168 |          3        0.64       58.60
+     418177 |          3        0.64       59.24
+     418183 |          3        0.64       59.87
+     418185 |          3        0.64       60.51
+     418213 |          3        0.64       61.15
+     418220 |          3        0.64       61.78
+     418225 |          3        0.64       62.42
+     418229 |          3        0.64       63.06
+     418237 |          3        0.64       63.69
+     418239 |          3        0.64       64.33
+     418243 |          3        0.64       64.97
+     418245 |          3        0.64       65.61
+     419198 |          3        0.64       66.24
+     419201 |          3        0.64       66.88
+     419242 |          3        0.64       67.52
+     419268 |          3        0.64       68.15
+     419272 |          3        0.64       68.79
+     419275 |          3        0.64       69.43
+     419276 |          3        0.64       70.06
+     419289 |          3        0.64       70.70
+     419297 |          3        0.64       71.34
+     419298 |          3        0.64       71.97
+     419302 |          3        0.64       72.61
+     419303 |          3        0.64       73.25
+     419305 |          3        0.64       73.89
+     419307 |          3        0.64       74.52
+     419309 |          3        0.64       75.16
+     419312 |          3        0.64       75.80
+     419319 |          3        0.64       76.43
+     419328 |          3        0.64       77.07
+     419335 |          3        0.64       77.71
+     419339 |          3        0.64       78.34
+     419343 |          3        0.64       78.98
+     419344 |          3        0.64       79.62
+     419347 |          3        0.64       80.25
+     419351 |          3        0.64       80.89
+     419357 |          3        0.64       81.53
+     419375 |          3        0.64       82.17
+     419376 |          3        0.64       82.80
+     419378 |          3        0.64       83.44
+     419379 |          3        0.64       84.08
+     419380 |          3        0.64       84.71
+     419381 |          3        0.64       85.35
+     419384 |          3        0.64       85.99
+     419388 |          3        0.64       86.62
+     419392 |          3        0.64       87.26
+     419400 |          3        0.64       87.90
+     419401 |          3        0.64       88.54
+     419406 |          3        0.64       89.17
+     419409 |          3        0.64       89.81
+     419410 |          3        0.64       90.45
+     419420 |          3        0.64       91.08
+     419432 |          3        0.64       91.72
+     419433 |          3        0.64       92.36
+     419434 |          3        0.64       92.99
+     419449 |          3        0.64       93.63
+     419450 |          3        0.64       94.27
+     419459 |          3        0.64       94.90
+     419461 |          3        0.64       95.54
+     419467 |          3        0.64       96.18
+     419472 |          3        0.64       96.82
+     419473 |          3        0.64       97.45
+     419479 |          3        0.64       98.09
+     419482 |          3        0.64       98.73
+     419483 |          3        0.64       99.36
+     419486 |          3        0.64      100.00
+------------+-----------------------------------
+      Total |        471      100.00
+
+reg lscrap d88 d89 grant grant_1 dum*
+note: dum1 omitted because of collinearity.
+note: dum2 omitted because of collinearity.
+note: dum3 omitted because of collinearity.
+note: dum4 omitted because of collinearity.
+note: dum5 omitted because of collinearity.
+note: dum6 omitted because of collinearity.
+note: dum7 omitted because of collinearity.
+note: dum8 omitted because of collinearity.
+note: dum9 omitted because of collinearity.
+note: dum10 omitted because of collinearity.
+note: dum12 omitted because of collinearity.
+note: dum13 omitted because of collinearity.
+note: dum14 omitted because of collinearity.
+note: dum15 omitted because of collinearity.
+note: dum16 omitted because of collinearity.
+note: dum18 omitted because of collinearity.
+note: dum19 omitted because of collinearity.
+note: dum20 omitted because of collinearity.
+note: dum21 omitted because of collinearity.
+note: dum22 omitted because of collinearity.
+note: dum23 omitted because of collinearity.
+note: dum24 omitted because of collinearity.
+note: dum25 omitted because of collinearity.
+note: dum27 omitted because of collinearity.
+note: dum31 omitted because of collinearity.
+note: dum32 omitted because of collinearity.
+note: dum34 omitted because of collinearity.
+note: dum35 omitted because of collinearity.
+note: dum39 omitted because of collinearity.
+note: dum40 omitted because of collinearity.
+note: dum42 omitted because of collinearity.
+note: dum43 omitted because of collinearity.
+note: dum45 omitted because of collinearity.
+note: dum47 omitted because of collinearity.
+note: dum48 omitted because of collinearity.
+note: dum49 omitted because of collinearity.
+note: dum50 omitted because of collinearity.
+note: dum51 omitted because of collinearity.
+note: dum52 omitted because of collinearity.
+note: dum53 omitted because of collinearity.
+note: dum56 omitted because of collinearity.
+note: dum57 omitted because of collinearity.
+note: dum59 omitted because of collinearity.
+note: dum60 omitted because of collinearity.
+note: dum61 omitted because of collinearity.
+note: dum62 omitted because of collinearity.
+note: dum64 omitted because of collinearity.
+note: dum65 omitted because of collinearity.
+note: dum67 omitted because of collinearity.
+note: dum68 omitted because of collinearity.
+note: dum69 omitted because of collinearity.
+note: dum71 omitted because of collinearity.
+note: dum73 omitted because of collinearity.
+note: dum76 omitted because of collinearity.
+note: dum79 omitted because of collinearity.
+note: dum82 omitted because of collinearity.
+note: dum84 omitted because of collinearity.
+note: dum86 omitted because of collinearity.
+note: dum88 omitted because of collinearity.
+note: dum90 omitted because of collinearity.
+note: dum94 omitted because of collinearity.
+note: dum95 omitted because of collinearity.
+note: dum96 omitted because of collinearity.
+note: dum97 omitted because of collinearity.
+note: dum98 omitted because of collinearity.
+note: dum99 omitted because of collinearity.
+note: dum101 omitted because of collinearity.
+note: dum102 omitted because of collinearity.
+note: dum103 omitted because of collinearity.
+note: dum109 omitted because of collinearity.
+note: dum110 omitted because of collinearity.
+note: dum113 omitted because of collinearity.
+note: dum114 omitted because of collinearity.
+note: dum115 omitted because of collinearity.
+note: dum116 omitted because of collinearity.
+note: dum118 omitted because of collinearity.
+note: dum119 omitted because of collinearity.
+note: dum120 omitted because of collinearity.
+note: dum121 omitted because of collinearity.
+note: dum122 omitted because of collinearity.
+note: dum125 omitted because of collinearity.
+note: dum126 omitted because of collinearity.
+note: dum127 omitted because of collinearity.
+note: dum129 omitted because of collinearity.
+note: dum130 omitted because of collinearity.
+note: dum132 omitted because of collinearity.
+note: dum133 omitted because of collinearity.
+note: dum135 omitted because of collinearity.
+note: dum137 omitted because of collinearity.
+note: dum138 omitted because of collinearity.
+note: dum139 omitted because of collinearity.
+note: dum140 omitted because of collinearity.
+note: dum142 omitted because of collinearity.
+note: dum143 omitted because of collinearity.
+note: dum145 omitted because of collinearity.
+note: dum146 omitted because of collinearity.
+note: dum147 omitted because of collinearity.
+note: dum148 omitted because of collinearity.
+note: dum150 omitted because of collinearity.
+note: dum151 omitted because of collinearity.
+note: dum152 omitted because of collinearity.
+note: dum153 omitted because of collinearity.
+note: dum154 omitted because of collinearity.
+note: dum157 omitted because of collinearity.
+
+xtreg lscrap d88 d89 grant grant_1 dum*
+
+      Source |       SS           df       MS      Number of obs   =       162
+-------------+----------------------------------   F(57, 104)      =     23.37
+       Model |  329.979162        57   5.7891081   Prob > F        =    0.0000
+    Residual |  25.7659272       104    .2477493   R-squared       =    0.9276
+-------------+----------------------------------   Adj R-squared   =    0.8879
+       Total |  355.745089       161  2.20959682   Root MSE        =    .49774
+
+------------------------------------------------------------------------------
+      lscrap | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         d88 |  -.0802157   .1094751    -0.73   0.465     -.297309    .1368776
+         d89 |  -.2472028   .1332183    -1.86   0.066    -.5113797    .0169741
+       grant |  -.2523149    .150629    -1.68   0.097    -.5510178    .0463881
+     grant_1 |  -.4215895      .2102    -2.01   0.047    -.8384239   -.0047551
+        dum1 |          0  (omitted)
+        dum2 |          0  (omitted)
+        dum3 |          0  (omitted)
+        dum4 |          0  (omitted)
+        dum5 |          0  (omitted)
+        dum6 |          0  (omitted)
+        dum7 |          0  (omitted)
+        dum8 |          0  (omitted)
+        dum9 |          0  (omitted)
+       dum10 |          0  (omitted)
+       dum11 |   -4.65953   .4201882   -11.09   0.000    -5.492779   -3.826281
+       dum12 |          0  (omitted)
+       dum13 |          0  (omitted)
+       dum14 |          0  (omitted)
+       dum15 |          0  (omitted)
+       dum16 |          0  (omitted)
+       dum17 |  -.7542711   .4201882    -1.80   0.076     -1.58752    .0789779
+       dum18 |          0  (omitted)
+       dum19 |          0  (omitted)
+       dum20 |          0  (omitted)
+       dum21 |          0  (omitted)
+       dum22 |          0  (omitted)
+       dum23 |          0  (omitted)
+       dum24 |          0  (omitted)
+       dum25 |          0  (omitted)
+       dum26 |   .0577978   .4201882     0.14   0.891    -.7754512    .8910468
+       dum27 |          0  (omitted)
+       dum28 |  -.2158623   .4201882    -0.51   0.609    -1.049111    .6173867
+       dum29 |  -.0380962   .4201882    -0.09   0.928    -.8713452    .7951528
+       dum30 |  -2.379942   .4201882    -5.66   0.000    -3.213191   -1.546693
+       dum31 |          0  (omitted)
+       dum32 |          0  (omitted)
+       dum33 |  -1.236383   .4201882    -2.94   0.004    -2.069632   -.4031338
+       dum34 |          0  (omitted)
+       dum35 |          0  (omitted)
+       dum36 |    1.46709   .4201882     3.49   0.001     .6338408    2.300339
+       dum37 |  -1.724571   .4201882    -4.10   0.000     -2.55782   -.8913224
+       dum38 |   .1023083   .4201882     0.24   0.808    -.7309407    .9355573
+       dum39 |          0  (omitted)
+       dum40 |          0  (omitted)
+       dum41 |  -2.536549   .4201882    -6.04   0.000    -3.369798     -1.7033
+       dum42 |          0  (omitted)
+       dum43 |          0  (omitted)
+       dum44 |  -1.951306   .4201882    -4.64   0.000    -2.784555   -1.118057
+       dum45 |          0  (omitted)
+       dum46 |  -2.113207   .4201882    -5.03   0.000    -2.946456   -1.279958
+       dum47 |          0  (omitted)
+       dum48 |          0  (omitted)
+       dum49 |          0  (omitted)
+       dum50 |          0  (omitted)
+       dum51 |          0  (omitted)
+       dum52 |          0  (omitted)
+       dum53 |          0  (omitted)
+       dum54 |  -1.651619   .4201882    -3.93   0.000    -2.484868   -.8183704
+       dum55 |  -4.733911   .4201882   -11.27   0.000     -5.56716   -3.900662
+       dum56 |          0  (omitted)
+       dum57 |          0  (omitted)
+       dum58 |  -3.480695   .4201882    -8.28   0.000    -4.313944   -2.647446
+       dum59 |          0  (omitted)
+       dum60 |          0  (omitted)
+       dum61 |          0  (omitted)
+       dum62 |          0  (omitted)
+       dum63 |   -.135155   .4064064    -0.33   0.740    -.9410743    .6707642
+       dum64 |          0  (omitted)
+       dum65 |          0  (omitted)
+       dum66 |  -1.499937   .4064064    -3.69   0.000    -2.305856   -.6940173
+       dum67 |          0  (omitted)
+       dum68 |          0  (omitted)
+       dum69 |          0  (omitted)
+       dum70 |  -1.031424   .4201882    -2.45   0.016    -1.864673   -.1981752
+       dum71 |          0  (omitted)
+       dum72 |  -2.228204   .4064064    -5.48   0.000    -3.034123   -1.422285
+       dum73 |          0  (omitted)
+       dum74 |  -1.295235   .4064064    -3.19   0.002    -2.101155    -.489316
+       dum75 |  -1.277327   .4064064    -3.14   0.002    -2.083246   -.4714076
+       dum76 |          0  (omitted)
+       dum77 |  -2.059604   .4064064    -5.07   0.000    -2.865523   -1.253685
+       dum78 |  -.9026834   .4064064    -2.22   0.029    -1.708603   -.0967642
+       dum79 |          0  (omitted)
+       dum80 |  -1.126138   .4064064    -2.77   0.007    -1.932057   -.3202186
+       dum81 |  -1.159775   .4064064    -2.85   0.005    -1.965694    -.353856
+       dum82 |          0  (omitted)
+       dum83 |  -1.997288   .4064064    -4.91   0.000    -2.803207   -1.191369
+       dum84 |          0  (omitted)
+       dum85 |  -2.498514   .4064064    -6.15   0.000    -3.304433   -1.692595
+       dum86 |          0  (omitted)
+       dum87 |  -2.101146   .4064064    -5.17   0.000    -2.907066   -1.295227
+       dum88 |          0  (omitted)
+       dum89 |   -.039261   .4064064    -0.10   0.923    -.8451803    .7666582
+       dum90 |          0  (omitted)
+       dum91 |   .5050424   .4064064     1.24   0.217    -.3008768    1.310962
+       dum92 |  -4.531866   .4201882   -10.79   0.000    -5.365115   -3.698617
+       dum93 |   1.408458   .4064064     3.47   0.001     .6025384    2.214377
+       dum94 |          0  (omitted)
+       dum95 |          0  (omitted)
+       dum96 |          0  (omitted)
+       dum97 |          0  (omitted)
+       dum98 |          0  (omitted)
+       dum99 |          0  (omitted)
+      dum100 |  -3.014315   .4064064    -7.42   0.000    -3.820234   -2.208396
+      dum101 |          0  (omitted)
+      dum102 |          0  (omitted)
+      dum103 |          0  (omitted)
+      dum104 |   .1472776   .4064064     0.36   0.718    -.6586417    .9531968
+      dum105 |  -1.031424   .4201882    -2.45   0.016    -1.864673   -.1981752
+      dum106 |  -.0125709   .4064064    -0.03   0.975    -.8184902    .7933483
+      dum107 |  -1.516345   .4124022    -3.68   0.000    -2.334154   -.6985364
+      dum108 |   1.370098   .4124022     3.32   0.001     .5522886    2.187907
+      dum109 |          0  (omitted)
+      dum110 |          0  (omitted)
+      dum111 |  -1.407879   .4124022    -3.41   0.001    -2.225688   -.5900703
+      dum112 |  -3.087889   .4201882    -7.35   0.000    -3.921138    -2.25464
+      dum113 |          0  (omitted)
+      dum114 |          0  (omitted)
+      dum115 |          0  (omitted)
+      dum116 |          0  (omitted)
+      dum117 |  -1.733484   .4124022    -4.20   0.000    -2.551293    -.915675
+      dum118 |          0  (omitted)
+      dum119 |          0  (omitted)
+      dum120 |          0  (omitted)
+      dum121 |          0  (omitted)
+      dum122 |          0  (omitted)
+      dum123 |  -2.397667   .4201882    -5.71   0.000    -3.230916   -1.564418
+      dum124 |  -.2756849   .4124022    -0.67   0.505    -1.093494    .5421241
+      dum125 |          0  (omitted)
+      dum126 |          0  (omitted)
+      dum127 |          0  (omitted)
+      dum128 |  -1.640466   .4124022    -3.98   0.000    -2.458275   -.8226575
+      dum129 |          0  (omitted)
+      dum130 |          0  (omitted)
+      dum131 |  -1.071024   .4124022    -2.60   0.011    -1.888832   -.2532146
+      dum132 |          0  (omitted)
+      dum133 |          0  (omitted)
+      dum134 |  -2.305868   .4124022    -5.59   0.000    -3.123677   -1.488059
+      dum135 |          0  (omitted)
+      dum136 |   .4492324   .4124022     1.09   0.279    -.3685766    1.267041
+      dum137 |          0  (omitted)
+      dum138 |          0  (omitted)
+      dum139 |          0  (omitted)
+      dum140 |          0  (omitted)
+      dum141 |   -.833677   .4124022    -2.02   0.046    -1.651486   -.0158681
+      dum142 |          0  (omitted)
+      dum143 |          0  (omitted)
+      dum144 |  -.1156672   .4201882    -0.28   0.784    -.9489162    .7175818
+      dum145 |          0  (omitted)
+      dum146 |          0  (omitted)
+      dum147 |          0  (omitted)
+      dum148 |          0  (omitted)
+      dum149 |  -1.210424   .4201882    -2.88   0.005    -2.043673   -.3771747
+      dum150 |          0  (omitted)
+      dum151 |          0  (omitted)
+      dum152 |          0  (omitted)
+      dum153 |          0  (omitted)
+      dum154 |          0  (omitted)
+      dum155 |  -.7330617   .4201882    -1.74   0.084    -1.566311    .1001873
+      dum156 |   1.480697   .4201882     3.52   0.001     .6474482    2.313946
+      dum157 |          0  (omitted)
+       _cons |   1.833711   .2990539     6.13   0.000     1.240676    2.426746
+------------------------------------------------------------------------------
+
+**********************
+** Efeito Aleatorio **
+**********************
+
+* Carregar Base -> WAGEPAN.DTA"
+
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,vce(cluster nr)
+
+Linear regression                               Number of obs     =      4,360
+                                                F(14, 544)        =      47.10
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.1893
+                                                Root MSE          =     .48033
+
+                                   (Std. err. adjusted for 545 clusters in nr)
+------------------------------------------------------------------------------
+             |               Robust
+       lwage | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       black |  -.1392342   .0505238    -2.76   0.006    -.2384798   -.0399887
+        hisp |   .0160195   .0390781     0.41   0.682     -.060743     .092782
+       exper |   .0672345   .0195958     3.43   0.001     .0287417    .1057273
+     expersq |  -.0024117   .0010252    -2.35   0.019    -.0044255   -.0003979
+       union |   .1824613   .0274435     6.65   0.000     .1285531    .2363695
+        educ |   .0913498   .0110822     8.24   0.000     .0695807    .1131189
+     married |   .1082529    .026034     4.16   0.000     .0571135    .1593924
+         d81 |     .05832    .028228     2.07   0.039     .0028707    .1137693
+         d82 |   .0627744   .0369735     1.70   0.090    -.0098538    .1354027
+         d83 |   .0620117    .046248     1.34   0.181    -.0288348    .1528583
+         d84 |   .0904672    .057988     1.56   0.119    -.0234407     .204375
+         d85 |   .1092463   .0668474     1.63   0.103    -.0220644     .240557
+         d86 |   .1419596   .0762348     1.86   0.063     -.007791    .2917102
+         d87 |   .1738334   .0852056     2.04   0.042     .0064611    .3412057
+       _cons |   .0920558   .1609365     0.57   0.568    -.2240773    .4081888
+------------------------------------------------------------------------------
+
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87
+
+      Source |       SS           df       MS      Number of obs   =     4,360
+-------------+----------------------------------   F(14, 4345)     =     72.46
+       Model |  234.048277        14  16.7177341   Prob > F        =    0.0000
+    Residual |  1002.48136     4,345  .230720682   R-squared       =    0.1893
+-------------+----------------------------------   Adj R-squared   =    0.1867
+       Total |  1236.52964     4,359  .283672779   Root MSE        =    .48033
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       black |  -.1392342   .0235796    -5.90   0.000    -.1854622   -.0930062
+        hisp |   .0160195   .0207971     0.77   0.441    -.0247535    .0567925
+       exper |   .0672345   .0136948     4.91   0.000     .0403856    .0940834
+     expersq |  -.0024117     .00082    -2.94   0.003    -.0040192   -.0008042
+       union |   .1824613   .0171568    10.63   0.000     .1488253    .2160973
+        educ |   .0913498   .0052374    17.44   0.000     .0810819    .1016177
+     married |   .1082529   .0156894     6.90   0.000     .0774937    .1390122
+         d81 |     .05832   .0303536     1.92   0.055    -.0011886    .1178286
+         d82 |   .0627744   .0332141     1.89   0.059    -.0023421    .1278909
+         d83 |   .0620117   .0366601     1.69   0.091    -.0098608    .1338843
+         d84 |   .0904672   .0400907     2.26   0.024      .011869    .1690654
+         d85 |   .1092463   .0433525     2.52   0.012     .0242533    .1942393
+         d86 |   .1419596    .046423     3.06   0.002     .0509469    .2329723
+         d87 |   .1738334    .049433     3.52   0.000     .0769194    .2707474
+       _cons |   .0920558   .0782701     1.18   0.240    -.0613935    .2455051
+------------------------------------------------------------------------------
+
+iis nr
+tis year
+
+sum lwage
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       lwage |      4,360    1.649147    .5326094  -3.579079    4.05186
+
+xtsum lwage
+
+Variable         |      Mean   Std. dev.       Min        Max |    Observations
+-----------------+--------------------------------------------+----------------
+lwage    overall |  1.649147   .5326094  -3.579079    4.05186 |     N =    4360
+         between |             .3907468   .3333435   3.174173 |     n =     545
+         within  |             .3622636  -2.467201   3.204687 |     T =       8
+
+xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, fe vce(cluster nr)
+
+note: black omitted because of collinearity.
+note: hisp omitted because of collinearity.
+note: educ omitted because of collinearity.
+note: d87 omitted because of collinearity.
+
+Fixed-effects (within) regression               Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1806                                         min =          8
+     Between = 0.0005                                         avg =        8.0
+     Overall = 0.0635                                         max =          8
+
+                                                F(10,544)         =      46.59
+corr(u_i, Xb) = -0.1212                         Prob > F          =     0.0000
+
+                                   (Std. err. adjusted for 545 clusters in nr)
+------------------------------------------------------------------------------
+             |               Robust
+       lwage | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       black |          0  (omitted)
+        hisp |          0  (omitted)
+       exper |   .1321464    .012008    11.00   0.000     .1085586    .1557342
+     expersq |  -.0051855   .0008102    -6.40   0.000    -.0067771   -.0035939
+       union |   .0800019   .0227431     3.52   0.000     .0353268    .1246769
+        educ |          0  (omitted)
+     married |   .0466804   .0210038     2.22   0.027     .0054218    .0879389
+         d81 |   .0190448   .0227267     0.84   0.402     -.025598    .0636876
+         d82 |   -.011322   .0212167    -0.53   0.594    -.0529987    .0303547
+         d83 |  -.0419955   .0205087    -2.05   0.041    -.0822814   -.0017096
+         d84 |  -.0384709   .0211722    -1.82   0.070    -.0800601    .0031183
+         d85 |  -.0432498    .017595    -2.46   0.014    -.0778122   -.0086874
+         d86 |  -.0273819   .0162181    -1.69   0.092    -.0592396    .0044757
+         d87 |          0  (omitted)
+       _cons |    1.02764   .0398919    25.76   0.000     .9492785    1.106001
+-------------+----------------------------------------------------------------
+     sigma_u |   .4009279
+     sigma_e |  .35099001
+         rho |  .56612236   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+*educ (exemplo) é não variável no tempo, por isso, coeficiente não é identificado.
+
+*ui = ai; eit = uit 
+*sigma_u - desvio padrão do efeito fixo (ai) 
+*sigma_e - desvio padrão do componente idiossincráico (uit) -> valores próximos
+*rho - correlação intraclasse do erro v (composto) ou fração de variância devido a ai. 
+*r2_o – quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade nas duas dimensões. 
+*r2_b - quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade entre grupos. 
+*r2_w - quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade intra grupos.
+
+*************************************************** 
+** Mudando de efeito fixo, para efeito aleatorio **
+***************************************************
+
+xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 
+
+Random-effects GLS regression                   Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1799                                         min =          8
+     Between = 0.1812                                         avg =        8.0
+     Overall = 0.1806                                         max =          8
+
+                                                Wald chi2(13)     =     954.64
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       black |  -.1446244   .0476275    -3.04   0.002    -.2379726   -.0512761
+        hisp |   .0209234   .0426121     0.49   0.623    -.0625947    .1044416
+       exper |   .1256486   .0096146    13.07   0.000     .1068043    .1444929
+     expersq |  -.0048727   .0006838    -7.13   0.000    -.0062129   -.0035325
+       union |   .1055662   .0178542     5.91   0.000     .0705727    .1405597
+        educ |   .1013786   .0089927    11.27   0.000     .0837532     .119004
+     married |   .0639171   .0167776     3.81   0.000     .0310337    .0968006
+         d81 |   .0169821   .0202427     0.84   0.402     -.022693    .0566571
+         d82 |  -.0111005   .0201207    -0.55   0.581    -.0505363    .0283352
+         d83 |  -.0399943   .0202432    -1.98   0.048    -.0796703   -.0003183
+         d84 |  -.0351051   .0202801    -1.73   0.083    -.0748534    .0046432
+         d85 |  -.0380792   .0202456    -1.88   0.060    -.0777598    .0016013
+         d86 |  -.0213125   .0203721    -1.05   0.295    -.0612412    .0186161
+       _cons |  -.1409168   .1134819    -1.24   0.214    -.3633372    .0815036
+-------------+----------------------------------------------------------------
+     sigma_u |  .32460315
+     sigma_e |  .35099001
+         rho |  .46100216   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+*theta (lambda na notação do livro)
+
+quietly regress lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, vce(cluster nr) 
+
+estimates store OLS 
+
+quietly xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, fe vce(cluster nr)
+
+estimates store FE 
+
+quietly xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, re vce(cluster nr)
+
+estimates store RE
+
+estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho theta)
+
+-----------------------------------------------------
+    Variable |    OLS           FE           RE      
+-------------+---------------------------------------
+       black | -.13923421    (omitted)   -.13937673  
+             |  .05052376                 .05092515  
+             |      -2.76                     -2.74  
+        hisp |  .01601951    (omitted)    .02173173  
+             |  .03907813                 .03991566  
+             |       0.41                      0.54  
+       exper |   .0672345    .13214642    .10575452  
+             |  .01959583    .01200804    .01637903  
+             |       3.43        11.00         6.46  
+     expersq |  -.0024117    -.0051855   -.00472394  
+             |   .0010252    .00081024    .00079168  
+             |      -2.35        -6.40        -5.97  
+       union |  .18246128    .08000186    .10613443  
+             |  .02744349     .0227431    .02084397  
+             |       6.65         3.52         5.09  
+        educ |  .09134979    (omitted)    .09187628  
+             |  .01108217                 .01114552  
+             |       8.24                      8.24  
+     married |  .10825295    .04668036    .06398602  
+             |    .026034    .02100382    .01897217  
+             |       4.16         2.22         3.37  
+         d81 |  .05831999    .01904479      .040462  
+             |  .02822803    .02272668    .02756841  
+             |       2.07         0.84         1.47  
+         d82 |  .06277442   -.01132198    .03092116  
+             |  .03697346     .0212167    .03507051  
+             |       1.70        -0.53         0.88  
+         d83 |  .06201174   -.04199552    .02028064  
+             |  .04624802    .02050869    .04386099  
+             |       1.34        -2.05         0.46  
+         d84 |  .09046719   -.03847088    .04311871  
+             |  .05798801    .02117215    .05558476  
+             |       1.56        -1.82         0.78  
+         d85 |   .1092463   -.04324982    .05781546  
+             |  .06684743    .01759497    .06455842  
+             |       1.63        -2.46         0.90  
+         d86 |  .14195959   -.02738194    .09194758  
+             |   .0762348    .01621806    .07470275  
+             |       1.86        -1.69         1.23  
+         d87 |  .17383343    (omitted)    .13492892  
+             |   .0852056                 .08486176  
+             |       2.04                      1.59  
+       _cons |  .09205578    1.0276395    .02358638  
+             |  .16093649     .0398919     .1599577  
+             |       0.57        25.76         0.15  
+-------------+---------------------------------------
+           N |       4360         4360         4360  
+          r2 |  .18927834    .18057757               
+        r2_o |                .0634798    .18298401  
+        r2_b |               .00045916    .18602694  
+        r2_w |               .18057757    .17992598  
+     sigma_u |                .4009279    .32460315  
+     sigma_e |               .35099001    .35099001  
+         rho |               .56612236    .46100216  
+       theta |                            .64291089  
+-----------------------------------------------------
+                                       Legend: b/se/t
+
+************
+** Testes **
+************
+
+*** Fazer nessa ordem ajuda na interpretação
+
+*1) Breusch and Pagan Lagrangian multiplier test for random effects
+
+* hipótese nula: var(ai) = 0 
+* a rejeição da hipótese nula indica que MQO agrupado não é modelo apropriado pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles.
+
+xtreg lwage exper expersq union married, re vce(cluster nr) theta
+
+Random-effects GLS regression                   Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1766                                         min =          8
+     Between = 0.0055                                         avg =        8.0
+     Overall = 0.0734                                         max =          8
+
+                                                Wald chi2(4)      =     439.46
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+theta        = .66674755
+
+                                   (Std. err. adjusted for 545 clusters in nr)
+------------------------------------------------------------------------------
+             |               Robust
+       lwage | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       exper |   .1175546   .0104012    11.30   0.000     .0971686    .1379406
+     expersq |  -.0047935   .0006536    -7.33   0.000    -.0060746   -.0035124
+       union |   .1000728   .0210756     4.75   0.000     .0587654    .1413803
+     married |   .0749106   .0193667     3.87   0.000     .0369525    .1128687
+       _cons |   1.067721   .0370905    28.79   0.000     .9950252    1.140417
+-------------+----------------------------------------------------------------
+     sigma_u |  .35135125
+     sigma_e |  .35125535
+         rho |   .5001365   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+xttest0
+
+Breusch and Pagan Lagrangian multiplier test for random effects
+
+        lwage[nr,t] = Xb + u[nr] + e[nr,t]
+
+        Estimated results:
+                         |       Var     SD = sqrt(Var)
+                ---------+-----------------------------
+                   lwage |   .2836728       .5326094
+                       e |   .1233803       .3512553
+                       u |   .1234477       .3513513
+
+        Test: Var(u) = 0
+                             chibar2(01) =  3807.33
+                          Prob > chibar2 =   0.0000
+
+* prob > chibar2 = 0 hipotese nula rejeitada, a variância de ui é diferente de zero, melhor especificacao não MQO Agrupado
+
+* 2) Teste F de Chow - teste de igualdade de interceptos e inclinações do POLS hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos a rejeição da hipótese nula indica que parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado
+
+xtreg lwage exper expersq union married, fe
+
+Fixed-effects (within) regression               Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1780                                         min =          8
+     Between = 0.0005                                         avg =        8.0
+     Overall = 0.0638                                         max =          8
+
+                                                F(4,3811)         =     206.38
+corr(u_i, Xb) = -0.1139                         Prob > F          =     0.0000
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       exper |   .1168467   .0084197    13.88   0.000     .1003392    .1333542
+     expersq |  -.0043009   .0006053    -7.11   0.000    -.0054876   -.0031142
+       union |   .0820871   .0192907     4.26   0.000      .044266    .1199083
+     married |   .0453033   .0183097     2.47   0.013     .0094056     .081201
+       _cons |    1.06488   .0266607    39.94   0.000     1.012609     1.11715
+-------------+----------------------------------------------------------------
+     sigma_u |   .4000539
+     sigma_e |  .35125535
+         rho |   .5646785   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(544, 3811) = 9.71                   Prob > F = 0.0000
+
+* teste consiste em estimar a equacao de efeito fixo
+* p-valor menor que 10% rejeito H0
+* Fe é preferida a MQO Agrupado
+
+* Primeiro teste sugeriu feito aleatorio o segundo efeito fixo, nos dois casos a solucao de agrupadamento foi descartada. Então devo escolher FE ou RE? 
+
+**********************
+** Teste de Hausman **
+**********************
+
+* 3)Teste de Hausman Ho: difference in coefficients not systematic (RE é consistente, heterogeneidade é aleatória), ou seja verificar se o ai está ou não correlacionado
+
+* A rejeição da hipótese nula indica que especificação correta é a de FE.
+
+* Etapa 1 -> Estimar com o Efeito Fixo
+
+estimates store fixed 
+hausman fixed 
+
+xtreg lwage exper expersq union married, fe 
+
+Fixed-effects (within) regression               Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1780                                         min =          8
+     Between = 0.0005                                         avg =        8.0
+     Overall = 0.0638                                         max =          8
+
+                                                F(4,3811)         =     206.38
+corr(u_i, Xb) = -0.1139                         Prob > F          =     0.0000
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       exper |   .1168467   .0084197    13.88   0.000     .1003392    .1333542
+     expersq |  -.0043009   .0006053    -7.11   0.000    -.0054876   -.0031142
+       union |   .0820871   .0192907     4.26   0.000      .044266    .1199083
+     married |   .0453033   .0183097     2.47   0.013     .0094056     .081201
+       _cons |    1.06488   .0266607    39.94   0.000     1.012609     1.11715
+-------------+----------------------------------------------------------------
+     sigma_u |   .4000539
+     sigma_e |  .35125535
+         rho |   .5646785   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(544, 3811) = 9.71                   Prob > F = 0.0000
+
+*Guardando resultados
+estimates store fixed 
+
+* Etapa 2 -> Estimar com o Efeito Aleatório
+
+xtreg lwage exper expersq union married, re
+
+Random-effects GLS regression                   Number of obs     =      4,360
+Group variable: nr                              Number of groups  =        545
+
+R-squared:                                      Obs per group:
+     Within  = 0.1766                                         min =          8
+     Between = 0.0055                                         avg =        8.0
+     Overall = 0.0734                                         max =          8
+
+                                                Wald chi2(4)      =     791.79
+corr(u_i, X) = 0 (assumed)                      Prob > chi2       =     0.0000
+
+------------------------------------------------------------------------------
+       lwage | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       exper |   .1175546   .0083129    14.14   0.000     .1012617    .1338475
+     expersq |  -.0047935   .0005933    -8.08   0.000    -.0059564   -.0036306
+       union |   .1000728   .0180797     5.54   0.000     .0646373    .1355084
+     married |   .0749106    .016978     4.41   0.000     .0416344    .1081868
+       _cons |   1.067721    .030557    34.94   0.000     1.007831    1.127612
+-------------+----------------------------------------------------------------
+     sigma_u |  .35135125
+     sigma_e |  .35125535
+         rho |   .5001365   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+*rodando o teste
+hausman fixed 
+
+                 ---- Coefficients ----
+             |      (b)          (B)            (b-B)     sqrt(diag(V_b-V_B))
+             |     fixed          .          Difference       Std. err.
+-------------+----------------------------------------------------------------
+       exper |    .1168467     .1175546       -.0007079        .0013369
+     expersq |   -.0043009    -.0047935        .0004926        .0001197
+       union |    .0820871     .1000728       -.0179857        .0067273
+     married |    .0453033     .0749106       -.0296073        .0068551
+------------------------------------------------------------------------------
+                          b = Consistent under H0 and Ha; obtained from xtreg.
+           B = Inconsistent under Ha, efficient under H0; obtained from xtreg.
+
+Test of H0: Difference in coefficients not systematic
+
+    chi2(4) = (b-B)'[(V_b-V_B)^(-1)](b-B)
+            = 250.26
+Prob > chi2 = 0.0000
+
+* P>valor = 0, menor que o nivel de significancia de 10%, rejeita ho, a especificação correta e FE
+
+
+
+
