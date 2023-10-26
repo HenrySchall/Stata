@@ -179,7 +179,7 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 ```
 ![ddd](https://github.com/HenrySchall/Stata/assets/96027335/ce010449-0a4e-4d44-9622-e1e8c07a439a)
 
-- O que aconteceria de usassemos a log price (lprice)? 
+- O que aconteceria de usássemos log price (lprice)? Teriamos resultados muito diferentes? (Experimente tentar)
 
 
 
