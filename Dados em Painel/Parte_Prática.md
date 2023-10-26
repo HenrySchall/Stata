@@ -164,17 +164,22 @@ uma região menos privilegiada da cidade. Então o efeito real da construção d
 
 - Todavia esse processo não é nem um pouco prático, então como podemos realizar essa estimação diretamente?
 
-```R
-reg rprice y81 nearinc y81nri
-```
+![IMAGES](https://github.com/HenrySchall/Stata/assets/96027335/90d8cbfb-69b6-4513-825f-ae3ad6d0bd66)
 
+```r
+reg rprice y81 nearinc y81nri
+# note que: y81 = dummy de 81 / nearinc = dummy de localização / y81nri = multiplicação das dummies 
+```
 ![IMAGES](https://github.com/HenrySchall/Stata/assets/96027335/216e6461-362c-4512-83ec-13722622fc6b)
 
+Observa-se que a variável foi dada como não significativa, nesse caso o autor recomenda acrescentar mais variáveis ao modelo (como no exemplo abaixo). Como é apenas um exemplo para demostrar o funcionamento do estimador desconsideramos esse resultado. 
+
+```R
+reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
+```
+![ddd](https://github.com/HenrySchall/Stata/assets/96027335/ce010449-0a4e-4d44-9622-e1e8c07a439a)
+
 - O que aconteceria de usassemos a log price (lprice)? 
-
-
-
-
 
 
 
