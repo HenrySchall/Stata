@@ -1,4 +1,4 @@
-# Exemplos de Dados em Painel
+# Estimação de Dados em Painel
 >Esse documento procura demonstrar o processo de estimação de dados em painel, usando como base o livro *Econometric Analysis of Cross Section and Panel Data, Second Edition, de Jeffrey M. Wooldridge*. Todas as bases utilizadas nesse código poder ser encontradas nesse repositório, para quaisquer dúvidas consultar a obra citada acima.
 
 ### 1) Primeiro Exemplo 
