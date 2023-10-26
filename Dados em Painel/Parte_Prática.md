@@ -125,6 +125,26 @@ são estatisticamente iguais.
 
  - Analisando à variável female e y85fem. Passamos a decompor à variável, ou seja, controlado pelos outros fatores a diferença salarial em y78, é de -31,67%, de tal forma, que no ano de y85 esse efeito é 8,50% menor (31,67% - 8,50% = -23,17%, ou seja, diminuição do efeito de um ano para o outro).
 
+### 3) Terceiro Exemplo 
+Carregar Base -> KIELMC.DTA"
+
+Nessa Base iremos ver como a instalação de um incinerador de lixo, afetou o preço dos imóveis em uma região de Massachusetts
+
+```r
+tab year
+```
+![imag1](https://github.com/HenrySchall/Stata/assets/96027335/d87c5f90-9086-4f4d-b5b1-054c694dedda)
+
+```r
+sum
+```
+![Imag2](https://github.com/HenrySchall/Stata/assets/96027335/d7b26c71-825c-414c-b976-bfa2ae16608c)
+
+```r
+reg rprice nearinc if year==1981
+```
+![imag3](https://github.com/HenrySchall/Stata/assets/96027335/71990ee0-1ecd-4ff4-9e1b-4f4f634ac1d7)
+
 
 
 
