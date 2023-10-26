@@ -158,7 +158,20 @@ reg rprice nearinc if year==1978
 
 ![imagg](https://github.com/HenrySchall/Stata/assets/96027335/9ad2b6c6-aa1a-4621-81c7-abc58a9f17a4)
 
-Nossa resposta será **Não**, porque vemos o mesmo efeito em 78, muito antes da construção do centro de tratamento de lixo.
+__*Nossa resposta será Não*__. Porque vemos o mesmo efeito em 78, muito antes da construção do centro de 
+tratamento de lixo. Sendo assim os preço são mais baixos, porque muito possívelmente estamos analisando
+uma região menos privilegiada da cidade. Então o efeito real da construção do centro de tratamento de lixo, será a diferença entre os anos y81 e y78, ou seja, 18.824 - 30.688 = 11.864 doláres -> estimador diferenças e indiferenças.
+
+- Todavia esse processo não é nem um pouco prático, então como podemos realizar essa estimação diretamente?
+
+```R
+reg rprice y81 nearinc y81nri
+```
+
+![IMAGES](https://github.com/HenrySchall/Stata/assets/96027335/216e6461-362c-4512-83ec-13722622fc6b)
+
+- O que aconteceria de usassemos a log price (lprice)? 
+
 
 
 
