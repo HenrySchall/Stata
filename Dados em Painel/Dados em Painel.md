@@ -15,7 +15,7 @@ reg kids educ age age2 black east northcen west farm othrural town smcity
 ```
 *Resultados*:
 
-![novo1](https://github.com/HenrySchall/Stata/assets/96027335/22361499-ca88-406c-ac28-ed6b1334e8ea)
+![novo1](https://github.com/HenrySchall/Stata/assets/96027335/d3220d18-ff9e-411b-bb54-ea5f619a4f99)
 
 Nessa regressão temos 1.129 observações, se quissemos saber quantas observações temos
 em cada ano dariamos:
