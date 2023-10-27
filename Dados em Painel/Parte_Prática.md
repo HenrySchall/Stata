@@ -126,7 +126,7 @@ são estatisticamente iguais.
  - Analisando à variável female e y85fem. Passamos a decompor à variável, ou seja, controlado pelos outros fatores a diferença salarial em y78, é de -31,67%, de tal forma, que no ano de y85 esse efeito é 8,50% menor (31,67% - 8,50% = -23,17%, ou seja, diminuição do efeito de um ano para o outro).
 
 ### 3) Terceiro Exemplo 
-Carregar Base -> KIELMC.DTA"
+Carregar Base -> KIELMC.DTA
 
 Nessa Base iremos ver como a instalação de um incinerador de lixo, afetou o preço dos imóveis em uma região de Massachusetts
 
@@ -181,6 +181,16 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 
 - O que aconteceria de usássemos log price (lprice)? Teriamos resultados muito diferentes? (Experimente tentar)
 
+### 4) Quarto Exemplo
+Carregar Base -> INJURY.DTA
+
+Resumo base: Efeito de uma mudança na regra de auxilio de compensação por acidente de trabalho. Até julho de 80 havia um limite em relaçãoa renda do indiividuo. Indivíudos, que tinha renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
+
+```R
+reg ldurat afchnge highearn afhigh
+```
+
+![imagess](https://github.com/HenrySchall/Stata/assets/96027335/5272cd4f-d043-4609-9255-99db6c4bb4fd)
 
 
 
