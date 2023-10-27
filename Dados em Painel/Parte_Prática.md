@@ -1,7 +1,8 @@
 # Estimação de Dados em Painel
 >Esse documento procura demonstrar o processo de estimação de dados em painel, usando como base o livro *Econometric Analysis of Cross Section and Panel Data, Second Edition, de Jeffrey M. Wooldridge*. Todas as bases utilizadas nesse código poder ser encontradas nesse repositório, para quaisquer dúvidas consultar a obra citada acima.
 
-### 1) Primeiro Exemplo 
+### Pooled Cross Section
+#### 1) Primeiro Exemplo 
 
 Carregar Base -> FERTIL1.DTA
 
@@ -80,7 +81,7 @@ Como as dummies de y74,y76,y78,80 são não significativas, controlado pelos out
 Podemos ver que as dummies y82 e y84 são significativas e negativas, ou seja, controlado pelos outros fatores, existe 
 uma tendência de longo prazo de queda na fecundidade e essa queda é de aproximadamente de 1/2 filho (0.522 - 0.545).
 
-### 2) Segundo Exemplo
+#### 2) Segundo Exemplo
 
 Carregar base -> CPS78_85.DTA
 ```r
@@ -125,7 +126,7 @@ são estatisticamente iguais.
 
  - Analisando à variável female e y85fem. Passamos a decompor à variável, ou seja, controlado pelos outros fatores a diferença salarial em y78, é de -31,67%, de tal forma, que no ano de y85 esse efeito é 8,50% menor (31,67% - 8,50% = -23,17%, ou seja, diminuição do efeito de um ano para o outro).
 
-### 3) Terceiro Exemplo 
+#### 3) Terceiro Exemplo 
 Carregar Base -> KIELMC.DTA
 
 Nessa Base iremos ver como a instalação de um incinerador de lixo, afetou o preço dos imóveis em uma região de Massachusetts
@@ -181,7 +182,7 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 
 - O que aconteceria de usássemos log price (lprice)? Teriamos resultados muito diferentes? (Experimente tentar)
 
-### 4) Quarto Exemplo
+#### 4) Quarto Exemplo
 Carregar Base -> INJURY.DTA
 
 Resumo base: Em julho de 80 havia um limite para recebimento de auxilio compensação por acidente de trabalho, em relação a renda dos indivíduos, sendo que indivíudos com renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
@@ -194,11 +195,15 @@ reg ldurat afchnge highearn afhigh
 ```
 ![imagess](https://github.com/HenrySchall/Stata/assets/96027335/5272cd4f-d043-4609-9255-99db6c4bb4fd)
 
-**DUVIDA**
-afhigh é significativa e positiva, ou seja, controlado pelos outros fatores, após a mudança da legislação, os indivíduos que tinham renda mais alta (não eram contemplados pela compensação), passaram à se afastar um período muito maior, cerca de 18% no tempo de duração de afastamento.
+- afchnge = é não significativa e positiva, ou seja, controlado pelos outros fatores, pós nova legislação não há mudança na duração do afastamento para os indivíduos de renda baixa, porque os afetados são apenas os indivíduos de renda alta. 
+- afhigh = é significativa e positiva, ou seja, controlado pelos outros fatores, após a mudança da legislação, os indivíduos que tinham renda mais alta (não eram contemplados pela compensação), passaram à se afastar um período muito maior, cerca de 18% no tempo de duração de afastamento.
 
 ```R
-reg ldurat afchnge highearn afhigh male married indust injtype****
+reg ldurat afchnge highearn afhigh male married indust injtype
 ```
 ![ddddffe](https://github.com/HenrySchall/Stata/assets/96027335/f85820d6-3649-41e6-848c-bebe1f1033c8)
+
+### Painel de Dois Períodos
+#### 1) Primeiro Exemplo 
+Carregar Base -> CRIME2.DTA
 
