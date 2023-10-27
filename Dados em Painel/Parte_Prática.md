@@ -204,13 +204,16 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 ### Painel de Dois Períodos
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
-Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 e 82.
+Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 e 82. 
+- crmrte = taxa de crime
+- unem = desemprego
 
 ```R
-
 reg crmrte d87 unem
 ```
 ![001](https://github.com/HenrySchall/Stata/assets/96027335/adb966a2-9498-4ec7-97d4-9f4bf2c904a4)
+
+* unem foi dada como não significativa, ou seja, há variáveis omitidas no erro e elas são coorrelacionadas com a variável explicativa desemprego, sendo assim, não posso estimar por MQO -> usar estimador de primeiras diferenças
 
 ```R
 reg ccrmrte cunem
