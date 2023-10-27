@@ -203,6 +203,10 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 ```
 ![ddddffe](https://github.com/HenrySchall/Stata/assets/96027335/f85820d6-3649-41e6-848c-bebe1f1033c8)
 
+```R
+reg crmrte unem if year==87
+```
+
 ### Painel de Dois Períodos
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
