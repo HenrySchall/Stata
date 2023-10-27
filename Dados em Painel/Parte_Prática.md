@@ -87,7 +87,6 @@ Carregar base -> CPS78_85.DTA
 ```r
 sum
 ```
-
 ![1](https://github.com/HenrySchall/Stata/assets/96027335/39ba4008-23ab-4681-94f1-5bc048e2d4dd)
 
 Para analisarmos as observações em cada ano, damos: 
@@ -159,7 +158,7 @@ reg rprice nearinc if year==1978
 
 ![imagg](https://github.com/HenrySchall/Stata/assets/96027335/9ad2b6c6-aa1a-4621-81c7-abc58a9f17a4)
 
-__*Nossa resposta será Não*__. Porque vemos o mesmo efeito em 78, muito antes da construção do centro de 
+Nossa resposta será __*Não*__. Porque vemos o mesmo efeito em 78, muito antes da construção do centro de 
 tratamento de lixo. Sendo assim os preço são mais baixos, porque muito possívelmente estamos analisando
 uma região menos privilegiada da cidade. Então o efeito real da construção do centro de tratamento de lixo, será a diferença entre os anos y81 e y78, ou seja, 18.824 - 30.688 = 11.864 doláres -> estimador diferenças e indiferenças.
 
@@ -184,7 +183,6 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 
 #### 4) Quarto Exemplo
 Carregar Base -> INJURY.DTA
-
 Resumo base: Em julho de 80 havia um limite para recebimento de auxilio compensação por acidente de trabalho, em relação a renda dos indivíduos, sendo que indivíudos com renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
 
 ```R
@@ -203,12 +201,19 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 ```
 ![ddddffe](https://github.com/HenrySchall/Stata/assets/96027335/f85820d6-3649-41e6-848c-bebe1f1033c8)
 
-```R
-reg crmrte unem if year==87
-```
-
 ### Painel de Dois Períodos
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
+Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 e 82.
 
-![Captura de tela 2023-10-27 152048](https://github.com/HenrySchall/Stata/assets/96027335/f55ac69e-96c5-420b-82de-f1bc8e13af1e)
+```R
+
+reg crmrte d87 unem
+```
+![001](https://github.com/HenrySchall/Stata/assets/96027335/adb966a2-9498-4ec7-97d4-9f4bf2c904a4)
+
+```R
+reg ccrmrte cunem
+```
+![00202](https://github.com/HenrySchall/Stata/assets/96027335/4ad5cd49-2833-46e5-9809-bd9d3f2181fb)
+
