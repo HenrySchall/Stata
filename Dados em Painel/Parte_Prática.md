@@ -211,3 +211,4 @@ reg crmrte unem if year==87
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
 
+![Captura de tela 2023-10-27 152048](https://github.com/HenrySchall/Stata/assets/96027335/f55ac69e-96c5-420b-82de-f1bc8e13af1e)
