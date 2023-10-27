@@ -184,13 +184,21 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 ### 4) Quarto Exemplo
 Carregar Base -> INJURY.DTA
 
-Resumo base: Efeito de uma mudança na regra de auxilio de compensação por acidente de trabalho. Até julho de 80 havia um limite em relaçãoa renda do indiividuo. Indivíudos, que tinha renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
+Resumo base: Em julho de 80 havia um limite para recebimento de auxilio compensação por acidente de trabalho, em relação a renda dos indivíduos, sendo que indivíudos com renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
 
 ```R
 reg ldurat afchnge highearn afhigh
+# afchnge = dummy pós período (1 = indivíduos afastados pós novo legislação e 0 = caso contrário)
+# highearn = dummy de tratamento (1 = Individuos com renda acima do limite da legislação antiga e 0 = caso contrário)
+# afhigh = dummy de interação
 ```
-
 ![imagess](https://github.com/HenrySchall/Stata/assets/96027335/5272cd4f-d043-4609-9255-99db6c4bb4fd)
 
+**DUVIDA**
+afhigh é significativa e positiva, ou seja, controlado pelos outros fatores, após a mudança da legislação, os indivíduos que tinham renda mais alta (não eram contemplados pela compensação), passaram à se afastar um período muito maior, cerca de 18% no tempo de duração de afastamento.
 
+```R
+reg ldurat afchnge highearn afhigh male married indust injtype****
+```
+![ddddffe](https://github.com/HenrySchall/Stata/assets/96027335/f85820d6-3649-41e6-848c-bebe1f1033c8)
 
