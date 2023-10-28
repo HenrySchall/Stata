@@ -209,14 +209,28 @@ Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 
 - unem = desemprego
 
 ```R
+# Mesma equação descrita na parte teórica
 reg crmrte d87 unem
 ```
 ![001](https://github.com/HenrySchall/Stata/assets/96027335/adb966a2-9498-4ec7-97d4-9f4bf2c904a4)
 
-* unem foi dada como não significativa, ou seja, há variáveis omitidas no erro e elas são coorrelacionadas com a variável explicativa desemprego, sendo assim, não posso estimar por MQO -> usar estimador de primeiras diferenças
+unem foi dada como não significativa (resultado contrário ao da literatura), então: 
+- há variáveis omitidas no erro
+- elas são coorrelacionadas com unem
+
+Então não posso estimar por MQO (viesado), vou usar estimador de primeiras diferenças.
 
 ```R
+#ccrmrte e cunem = são as primeiras diferenças das variáveis
+
 reg ccrmrte cunem
 ```
 ![00202](https://github.com/HenrySchall/Stata/assets/96027335/4ad5cd49-2833-46e5-9809-bd9d3f2181fb)
+
+**Atenção** -> Mudança na interpretação das variáveis
+
+- Vemos claramente que nosso modelo passou a ser significativo, assim como a variável unem.
+- Interpretação _cons (intercepto) -> Condicionado pelas outras variavies explicativas iguais a 0, a variação da variável dependente é igual a 15.4 pontos perceutais, ou seja, mesmo com o desemprego não variando, ocorre um aumento nas ocorrências de crimininalidade de 82 para 87 em 15.4 ocorrências para cada grupo de 1000 habitantes.
+- Interpretação unem -> Quando o desemprego varia em um ponto percentual, a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 ocorrências para cada grupo de 1000 habitantes.
+
 
