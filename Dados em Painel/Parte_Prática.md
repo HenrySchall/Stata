@@ -247,4 +247,5 @@ sum dthrte85 dthrte90
 ```R
 reg cdthrte copen cadmn
 ```
-![2843328434](https://github.com/HenrySchall/Stata/assets/96027335/a7656229-483c-45af-951e-fde765fdec80)
+![1323423432](https://github.com/HenrySchall/Stata/assets/96027335/05c5b7f0-2e98-4c66-8802-72c37eedbf23)
+
