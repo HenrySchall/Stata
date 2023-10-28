@@ -61,7 +61,6 @@ pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, c
 - town = Não é significativa
 - smcity = Não é significativa
 
-**DÚVIDA**
 Essa base nos permite fazer diversas indagações, sobre o efeito da fecundidade em cada ano, por exemplo será que y76 é maior que y80?. Por isso usaremos dummies estruturais temporais, buscando ver o efeito causal isolado de cada ano.
 
 ```r
@@ -106,14 +105,11 @@ Nosso modelo é significativo, porque temos Prob > F = 0.0000 e todas as variáv
 - Salários de 85 são maiores que os de 78?
 - Esse efeito da educação é maior em 78 ou em 85?
 
-**DÚVIDA**
 Por isso novamente voltaremos à usar dummies para quantificar esse efeito
 
 ```r
 reg lwage y85 educ y85educ exper expersq union female y85fem
 ```
-
-**DÚVIDA** -> Porque nao fizemos isso no exemplo anterior
 As dummies multiplicativas serão usadas para testar o efeito de alteração das variáveis durante y78 e y85
 
 ![imag](https://github.com/HenrySchall/Stata/assets/96027335/689ef635-79c4-498c-94be-8dcd7e198770)
@@ -234,18 +230,8 @@ reg ccrmrte cunem
 - Interpretação _cons (intercepto) -> Condicionado pelas outras variavies explicativas iguais a 0, a variação da variável dependente é igual a 15.4 pontos perceutais, ou seja, mesmo com o desemprego não variando, ocorre um aumento nas ocorrências de crimininalidade de 82 para 87 em 15.4 ocorrências para cada grupo de 1000 habitantes.
 - Interpretação unem -> Quando o desemprego varia em um ponto percentual, a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 ocorrências para cada grupo de 1000 habitantes.
 
-#### 2) Segundo Exemplo 
-Carregar Base -> RAFFIC1.DTA
+### Estimadores de Efeitos Fixos & Efeitos Aleatórios
+#### 1) Primeiro Exemplo 
+Carregar Base -> Jtrain.DTA
 
-Resumo base: Acidentes de trânsito, após à implantação de uma lei seca 
-```R
-# dthrte85 -> taxa média de mortes
-sum dthrte85 dthrte90
-```
-![2843328434](https://github.com/HenrySchall/Stata/assets/96027335/b164c95e-d055-4c13-9426-846bdff4708e)
-
-```R
-reg cdthrte copen cadmn
-```
-![1323423432](https://github.com/HenrySchall/Stata/assets/96027335/05c5b7f0-2e98-4c66-8802-72c37eedbf23)
-
+Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mostrando a taxa de descarte dos seus produtos, num cenário onde há subsídio. 
