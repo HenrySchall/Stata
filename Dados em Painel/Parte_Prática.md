@@ -204,6 +204,7 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 ### Painel de Dois Períodos
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
+
 Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 e 82. 
 - crmrte = taxa de crime
 - unem = desemprego
@@ -233,4 +234,17 @@ reg ccrmrte cunem
 - Interpretação _cons (intercepto) -> Condicionado pelas outras variavies explicativas iguais a 0, a variação da variável dependente é igual a 15.4 pontos perceutais, ou seja, mesmo com o desemprego não variando, ocorre um aumento nas ocorrências de crimininalidade de 82 para 87 em 15.4 ocorrências para cada grupo de 1000 habitantes.
 - Interpretação unem -> Quando o desemprego varia em um ponto percentual, a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 ocorrências para cada grupo de 1000 habitantes.
 
+#### 2) Segundo Exemplo 
+Carregar Base -> RAFFIC1.DTA
 
+Resumo base: Acidentes de trânsito, após à implantação de uma lei seca 
+```R
+# dthrte85 -> taxa média de mortes
+sum dthrte85 dthrte90
+```
+![2843328434](https://github.com/HenrySchall/Stata/assets/96027335/b164c95e-d055-4c13-9426-846bdff4708e)
+
+```R
+reg cdthrte copen cadmn
+```
+![2843328434](https://github.com/HenrySchall/Stata/assets/96027335/a7656229-483c-45af-951e-fde765fdec80)
