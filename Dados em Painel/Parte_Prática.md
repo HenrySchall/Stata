@@ -1,7 +1,7 @@
 # Estimação de Dados em Painel
 >Esse documento procura demonstrar o processo de estimação de dados em painel, usando como base o livro *Econometric Analysis of Cross Section and Panel Data, Second Edition, de Jeffrey M. Wooldridge*. Todas as bases utilizadas nesse código poder ser encontradas nesse repositório, para quaisquer dúvidas consultar a obra citada acima.
 
-### Pooled Cross Section
+## Pooled Cross Section
 #### 1) Primeiro Exemplo 
 
 Carregar Base -> FERTIL1.DTA
@@ -197,7 +197,8 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 ```
 ![ddddffe](https://github.com/HenrySchall/Stata/assets/96027335/f85820d6-3649-41e6-848c-bebe1f1033c8)
 
-### Painel de Dois Períodos
+## Painel Verdadeiro 
+### Estimador de Primeiras Diferenças
 #### 1) Primeiro Exemplo 
 Carregar Base -> CRIME2.DTA
 
@@ -219,7 +220,6 @@ Então não posso estimar por MQO (viesado), vou usar estimador de primeiras dif
 
 ```R
 #ccrmrte e cunem = são as primeiras diferenças das variáveis
-
 reg ccrmrte cunem
 ```
 ![00202](https://github.com/HenrySchall/Stata/assets/96027335/4ad5cd49-2833-46e5-9809-bd9d3f2181fb)
@@ -230,8 +230,27 @@ reg ccrmrte cunem
 - Interpretação _cons (intercepto) -> Condicionado pelas outras variavies explicativas iguais a 0, a variação da variável dependente é igual a 15.4 pontos perceutais, ou seja, mesmo com o desemprego não variando, ocorre um aumento nas ocorrências de crimininalidade de 82 para 87 em 15.4 ocorrências para cada grupo de 1000 habitantes.
 - Interpretação unem -> Quando o desemprego varia em um ponto percentual, a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 ocorrências para cada grupo de 1000 habitantes.
 
-### Estimadores de Efeitos Fixos & Efeitos Aleatórios
+### Estimador de Efeitos Fixos
 #### 1) Primeiro Exemplo 
 Carregar Base -> Jtrain.DTA
 
-Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mostrando a taxa de descarte dos seus produtos, num cenário onde há subsídio. 
+Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mostrando a taxa de descarte dos seus produtos, num cenário onde há subsídio governamental para treinamento de funcionários.
+
+- lscrap = taxa de descarte
+- grant = subsídio com treinamento
+- grant = dummy para 88
+- grant_1 = dummy para 89
+
+```R
+#estimando sem o efeito fixo
+reg lscrap d88 d89 grant grant_1
+```
+
+![2323fdefef](https://github.com/HenrySchall/Stata/assets/96027335/7de73d72-f916-495f-9ca0-be913a8e0f5e)
+
+```R
+#estimando com o efeito fixo
+xtreg lscrap d88 d89 grant grant_1, fe
+```
+
+![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
