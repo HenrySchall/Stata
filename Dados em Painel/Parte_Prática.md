@@ -237,20 +237,19 @@ Carregar Base -> Jtrain.DTA
 Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mostrando a taxa de descarte dos seus produtos, num cenário onde há subsídio governamental para treinamento de funcionários.
 
 - lscrap = taxa de descarte
-- grant = subsídio com treinamento
-- grant = dummy para 88
-- grant_1 = dummy para 89
+- grant = subsídio para treinamento dummy para 89
+- grant_1 = subsídio para treinamento dummy para 88
 
 ```R
 #estimando sem o efeito fixo
 reg lscrap d88 d89 grant grant_1
 ```
-
 ![2323fdefef](https://github.com/HenrySchall/Stata/assets/96027335/7de73d72-f916-495f-9ca0-be913a8e0f5e)
+
+grant e grant_1 são positivos, mas não significativos. Então existe alguma coisa omitida no erro, o que leva a estimação via MQO ser viesada. Por exemplo, poderiamos dizer que existe diferenças entre as empresas na forma que os descartes são feitos, ou seja, poderiamos considerar esse fator como um efeito fixo (FE).
 
 ```R
 #estimando com o efeito fixo
 xtreg lscrap d88 d89 grant grant_1, fe
 ```
-
 ![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
