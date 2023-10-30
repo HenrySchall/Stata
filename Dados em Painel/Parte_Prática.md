@@ -219,7 +219,7 @@ unem foi dada como não significativa (resultado contrário ao da literatura), e
 Então não posso estimar por MQO (viesado), vou usar estimador de primeiras diferenças.
 
 ```R
-#ccrmrte e cunem = são as primeiras diferenças das variáveis
+# ccrmrte e cunem = são as primeiras diferenças das variáveis
 reg ccrmrte cunem
 ```
 ![00202](https://github.com/HenrySchall/Stata/assets/96027335/4ad5cd49-2833-46e5-9809-bd9d3f2181fb)
@@ -239,9 +239,10 @@ Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mo
 - lscrap = taxa de descarte
 - grant = subsídio para treinamento dummy para 89
 - grant_1 = subsídio para treinamento dummy para 88
+- fcode = é o código da empresa
 
 ```R
-#estimando sem o efeito fixo
+# estimando sem o efeito fixo
 reg lscrap d88 d89 grant grant_1
 ```
 ![2323fdefef](https://github.com/HenrySchall/Stata/assets/96027335/7de73d72-f916-495f-9ca0-be913a8e0f5e)
@@ -249,7 +250,35 @@ reg lscrap d88 d89 grant grant_1
 grant e grant_1 são positivos, mas não significativos. Então existe alguma coisa omitida no erro, o que leva a estimação via MQO ser viesada. Por exemplo, poderiamos dizer que existe diferenças entre as empresas na forma que os descartes são feitos, ou seja, poderiamos considerar esse fator como um efeito fixo (FE).
 
 ```R
+# identificando para o stata a presença de um painel, monstrando qual variável será o "i" e quando varipavel será o "t"
+iis fcode # variável i 
+tis year # variável t
+```
+
+```R
 #estimando com o efeito fixo
 xtreg lscrap d88 d89 grant grant_1, fe
 ```
 ![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
+
+*Dúvida*
+- Nosso modelo é significativo do ponto de vista global (Prob > F = 0.0001)
+- Controlado por outos fatores as taxas de descarte de 88 não são diferentes de em 89 estatiscamente falando
+- As taxas de descarte de 89, controlado por outros fatores, são menores do que em 89
+- Subsídios, controlado por outros fatores, reduz a taxa de descarte
+- Controladas por outros fatores, os subsidios diminuem as taxas de descarte
+
+LSDV -> 
+
+```R
+tabulate fcode, generate(dum)
+```
+
+```R
+xtreg lscrap d88 d89 grant grant_1 dum*
+```
+### Estimador de Efeitos Aleatório
+#### 1) Primeiro Exemplo 
+Carregar Base -> WAGEPAN.DTA"
+
+
