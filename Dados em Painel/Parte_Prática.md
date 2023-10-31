@@ -256,7 +256,7 @@ tis year # variável t
 ```
 
 ```R
-#estimando com o efeito fixo
+# Estimando com o efeito fixo
 xtreg lscrap d88 d89 grant grant_1, fe
 ```
 ![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
