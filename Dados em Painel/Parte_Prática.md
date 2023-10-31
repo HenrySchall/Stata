@@ -272,11 +272,9 @@ LSDV ->
 
 ```R
 tabulate fcode, generate(dum)
-```
-
-```R
 xtreg lscrap d88 d89 grant grant_1 dum*
 ```
+
 ### Estimador de Efeitos Aleatório
 #### 1) Primeiro Exemplo 
 Carregar Base -> WAGEPAN.DTA"
