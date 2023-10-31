@@ -23,7 +23,7 @@ em cada ano dariamos:
 
 ```r
 sort year
-by year: tab kids (
+by year: tab kids
 #kids é nossa variável dependente, poderiamos pegar qualquer variável
 ```
 ![novo2](https://github.com/HenrySchall/Stata/assets/96027335/5672bab5-815c-4333-8893-a009961878b2)
