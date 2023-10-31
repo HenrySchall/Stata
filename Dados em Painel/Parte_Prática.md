@@ -199,7 +199,7 @@ reg ldurat afchnge highearn afhigh male married indust injtype
 
 ## Painel Verdadeiro 
 ### Estimador de Primeiras Diferenças
-#### 1) Primeiro Exemplo 
+#### Exemplo 
 Carregar Base -> CRIME2.DTA
 
 Resumo base: Taxas de criminalidade para os mesmos munícipios americanos em 87 e 82. 
@@ -231,7 +231,7 @@ reg ccrmrte cunem
 - Interpretação unem -> Quando o desemprego varia em um ponto percentual, a ocorrência de criminalidade aumenta (varia positivamente) em 2.2 ocorrências para cada grupo de 1000 habitantes.
 
 ### Estimador de Efeitos Fixos
-#### 1) Primeiro Exemplo 
+#### Exemplo 
 Carregar Base -> Jtrain.DTA
 
 Resumo Base: Acompanhamento de 54 empresas, as mesmas durantes os três anos, mostrando a taxa de descarte dos seus produtos, num cenário onde há subsídio governamental para treinamento de funcionários.
