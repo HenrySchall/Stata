@@ -268,7 +268,7 @@ xtreg lscrap d88 d89 grant grant_1, fe
 - Subsídios, controlado por outros fatores, reduz a taxa de descarte
 - Controladas por outros fatores, os subsidios diminuem as taxas de descarte
 
-LSDV -> 
+#### Método Alternativo -> LSDV (Least Squares Dummy Variable)
 
 ```R
 tabulate fcode, generate(dum)
