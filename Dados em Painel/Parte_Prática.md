@@ -279,4 +279,13 @@ xtreg lscrap d88 d89 grant grant_1 dum*
 #### 1) Primeiro Exemplo 
 Carregar Base -> WAGEPAN.DTA"
 
+```R
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,
+```
+![Foto](https://github.com/HenrySchall/Stata/assets/96027335/7d694718-8790-4307-97f1-ec3ce24d8465)
+
+```R
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,vce(cluster nr)
+```
+
 
