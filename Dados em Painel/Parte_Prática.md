@@ -309,9 +309,12 @@ reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d8
 ![imagem_1](https://github.com/HenrySchall/Stata/assets/96027335/cd19d5e9-7a60-4095-a23f-8a857d5e036c)
 
 ```R
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe
+iis nr
+tis year
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe vce(cluster nr)
 ```
 
-![imagem2](https://github.com/HenrySchall/Stata/assets/96027335/942af616-4a25-440b-9121-b0ae762e9642)
+![imagem3](https://github.com/HenrySchall/Stata/assets/96027335/abe459b8-70e0-46b5-858f-6a1345aee3a7)
+
 
 
