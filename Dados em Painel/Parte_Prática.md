@@ -272,6 +272,9 @@ xtreg lscrap d88 d89 grant grant_1, fe
 
 ```R
 tabulate fcode, generate(dum)
+```
+
+```R
 xtreg lscrap d88 d89 grant grant_1 dum*
 ```
 
@@ -279,7 +282,7 @@ xtreg lscrap d88 d89 grant grant_1 dum*
 Carregar Base -> WAGEPAN.DTA"
 
 ```R
-#Sem efeito (ai)
+#Sem efeito (Ai)
 reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87
 ```
 IMAGEM
