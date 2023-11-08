@@ -281,43 +281,32 @@ xtreg lscrap d88 d89 grant grant_1 dum*
 ### Estimador de Efeitos Aleatório
 Carregar Base -> WAGEPAN.DTA"
 
-```R
-#Sem efeito (Ai)
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87
-```
-IMAGEM
-
-```R
-#efeito fixo
-iis nr
-tis year
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe
-```
-IMAGEM
-
-```R
-#efeito aleatório
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,re
-```
-IMAGEM
-
-- **A grande questão é, qual o melhor modelo?**
-
 #### 1) Primeiro Exemplo
-```R
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,vce(cluster nr)
-#vce(cluster nr) -> controle de heterocedasticidade
-```
 
+```R
+# Sem efeito fixo (Ai)
+reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, vce(cluster nr)
+# vce(cluster nr) -> controle de heterocedasticidade
+```
 ![imagem_1](https://github.com/HenrySchall/Stata/assets/96027335/cd19d5e9-7a60-4095-a23f-8a857d5e036c)
 
 ```R
+# Com efeito fixo
 iis nr
 tis year
-reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe vce(cluster nr)
+xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe vce(cluster nr)
 ```
-
 ![imagem3](https://github.com/HenrySchall/Stata/assets/96027335/abe459b8-70e0-46b5-858f-6a1345aee3a7)
+
+```R
+# Com efeito aleatório
+xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, re vce(cluster nr)
+```
+![imagem2223](https://github.com/HenrySchall/Stata/assets/96027335/a2510f48-27db-4936-9465-e008b3ff97b8)
+
+- **A grande questão é, qual o melhor modelo?**
+
+
 
 
 
