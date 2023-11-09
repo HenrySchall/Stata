@@ -279,6 +279,7 @@ xtreg lscrap d88 d89 grant grant_1 dum*
 ```
 
 ### Estimador de Efeitos Aleatório
+#### Exemplo
 Carregar Base -> WAGEPAN.DTA"
 
 Legenda de variáveis:
@@ -313,9 +314,7 @@ xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 
 ```
 ![imagem2223](https://github.com/HenrySchall/Stata/assets/96027335/a2510f48-27db-4936-9465-e008b3ff97b8)
 
-- **A grande questão é, qual o melhor modelo?** 
-
-#### Realizando os testes 
+##### Gerar Tabela Comparativa 
 ```R
 # MQO
 quietly regress lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, vce(cluster nr) 
@@ -336,8 +335,36 @@ estimates store RE
 ```
 
 ```R
-# Gerar Tabela Comparativa 
+# Gerar Tabela Conjunta
 estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho theta)
+```
+- *A questão é, qual o melhor modelo?*
+
+##### Realizando os testes
+Fazer nessa ordem ajuda na interpretação
+1) Breusch and Pagan Lagrangian multiplier test for random effects
+
+Hipótese nula: var(ai) = 0 
+A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles.
+
+```R
+xtreg lwage exper expersq union married, re vce(cluster nr) theta
+```
+![1234454](https://github.com/HenrySchall/Stata/assets/96027335/2f6dff05-d704-4bb6-93dd-1bdaadd72acc)
+
+```R
+xttest0
+```
+![232344](https://github.com/HenrySchall/Stata/assets/96027335/4df14706-da14-49c8-89a7-ec318f806bfd)
+
+2) Teste F de Chow - teste de igualdade de interceptos e inclinações do POLS hipótese nula: Há igualdade de  interceptos e inclinações para todos os indivíduos a rejeição da hipótese nula indica que parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado
+
+```R
+xtreg lwage exper expersq union married, fe
+```
+
+```R
+xtreg lwage exper expersq union married, fe
 ```
 
 
