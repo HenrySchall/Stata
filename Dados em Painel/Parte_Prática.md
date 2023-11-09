@@ -344,8 +344,8 @@ estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho 
 Fazer nessa ordem ajuda na interpretação
 1) Breusch and Pagan Lagrangian multiplier test for random effects
 
-Hipótese nula: var(ai) = 0 
-A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles.
+- Hipótese nula: var(ai) = 0 
+- A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles.
 
 ```R
 xtreg lwage exper expersq union married, re vce(cluster nr) theta
@@ -357,14 +357,18 @@ xttest0
 ```
 ![232344](https://github.com/HenrySchall/Stata/assets/96027335/4df14706-da14-49c8-89a7-ec318f806bfd)
 
-2) Teste F de Chow - teste de igualdade de interceptos e inclinações do POLS hipótese nula: Há igualdade de  interceptos e inclinações para todos os indivíduos a rejeição da hipótese nula indica que parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado
+- prob > chibar2 = 0 -> hipótese nula rejeitada (inferior a nível de significância de 10%)
+- A variância de ui é diferente de zero, melhor especificação não é MQO Agrupado, há efeito fixo
+
+2) Teste F de Chow - Teste de igualdade de interceptos e inclinações do POLS.Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
+
+- hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos.
+- A rejeição da hipótese nula indica que os parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado.
 
 ```R
 xtreg lwage exper expersq union married, fe
 ```
+![4556](https://github.com/HenrySchall/Stata/assets/96027335/d3bd6aa6-3e40-4a6c-9666-b21a5413435d)
 
-```R
-xtreg lwage exper expersq union married, fe
-```
 
 
