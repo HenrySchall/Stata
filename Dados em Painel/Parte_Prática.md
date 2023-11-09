@@ -281,17 +281,26 @@ xtreg lscrap d88 d89 grant grant_1 dum*
 ### Estimador de Efeitos Aleatório
 Carregar Base -> WAGEPAN.DTA"
 
-#### 1) Primeiro Exemplo
+Legenda de variáveis:
+- ui -> ai
+- eit -> uit
+- sigma_u -> desvio padrão do efeito fixo (ai)
+- sigma_e -> desvio padrão do componente endiossincráico (uit)
+- rho -> correlação intraclasse do erro v (composto) ou devido ao ai.
+- r2_o -> quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade nas duas dimensões.
+- r2_b -> quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade entre grupos.
+- r2_w -> quadrado do coeficiente de correlação entre valores observados e ajustados (ignorando ai) para variabilidade intra grupos.
+- theta -> lambda
 
 ```R
-# Sem efeito fixo (Ai)
+# Sem Efeito Fixo (Ai) -> MQO
 reg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, vce(cluster nr)
 # vce(cluster nr) -> controle de heterocedasticidade
 ```
 ![imagem_1](https://github.com/HenrySchall/Stata/assets/96027335/cd19d5e9-7a60-4095-a23f-8a857d5e036c)
 
 ```R
-# Com efeito fixo
+# Efeito Fixo (FE)
 iis nr
 tis year
 xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87,fe vce(cluster nr)
@@ -299,14 +308,36 @@ xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 
 ![imagem3](https://github.com/HenrySchall/Stata/assets/96027335/abe459b8-70e0-46b5-858f-6a1345aee3a7)
 
 ```R
-# Com efeito aleatório
-xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, re vce(cluster nr)
+# Efeito Aleatório (RE)
+xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, re vce(cluster nr) theta
 ```
 ![imagem2223](https://github.com/HenrySchall/Stata/assets/96027335/a2510f48-27db-4936-9465-e008b3ff97b8)
 
-- **A grande questão é, qual o melhor modelo?**
+- **A grande questão é, qual o melhor modelo?** 
 
+#### Realizando os testes 
+```R
+# MQO
+quietly regress lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, vce(cluster nr) 
+estimates store OLS
+# quietly é para não apresentar os resultados
+```
 
+```R
+# Efeito Fixo (FE)
+quietly xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, fe vce(cluster nr)
+estimates store FE
+```
 
+```R
+# Efeito Aleatório (RE)
+quietly xtreg lwage black hisp exper expersq union educ married d81 d82 d83 d84 d85 d86 d87, re vce(cluster nr)
+estimates store RE
+```
+
+```R
+# Gerar Tabela Comparativa 
+estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho theta)
+```
 
 
