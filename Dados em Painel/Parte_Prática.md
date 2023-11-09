@@ -345,7 +345,7 @@ Fazer nessa ordem ajuda na interpretação
 1) Breusch and Pagan Lagrangian multiplier test for random effects
 
 - Hipótese nula: var(ai) = 0 
-- A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2.
+- A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles
 
 ```R
 xtreg lwage exper expersq union married, re vce(cluster nr) theta
@@ -364,7 +364,7 @@ xttest0
 
 > Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
 
-- hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos.
+- Hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos.
 - A rejeição da hipótese nula indica que os parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado.
 
 ```R
@@ -380,7 +380,10 @@ xtreg lwage exper expersq union married, fe
 Primeiro teste sugeriu RE o segundo FE, nos dois casos a solução de agrupadamento foi descartada. Então qual devo escolher FE ou RE?
 
 3) Teste de Hausman
-> Ele é usado para comparar modelos, para verificar se há diferença sistemática nos parâmentros estimados entre os modelos, com o o bjetivo deselecionar o modelo mais parcimonioso. 
+> Ele é usado para comparar modelos, para verificar se há diferença sistemática nos parâmentros estimados entre os modelos, com o o bjetivo deselecionar o modelo mais parcimonioso.
+
+- Hipótese nula: Diferença nos coeficientes não é sistemática
+- A rejeição da hipótese nula indica que a especificação correta é FE
 
 ```R
 # Etapa 1 -> Estimar com o Efeito Fixo
@@ -400,8 +403,11 @@ xtreg lwage exper expersq union married, re
 ![Imagem20](https://github.com/HenrySchall/Stata/assets/96027335/66cd46b5-9ca9-4bb5-ab57-1b0b36471ad7)
 
 ```R
-# Rodando o teste
+# Rodando Teste
 hausman fixed 
 ```
 ![teste](https://github.com/HenrySchall/Stata/assets/96027335/47de4428-6051-485d-9efd-78e4540a2a29)
+
+- P > chi2 = 0 -> menor que o nivel de significancia, ou seja, rejeita H0
+- A especificação correta é FE
 
