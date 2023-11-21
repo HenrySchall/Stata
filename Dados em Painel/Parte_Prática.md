@@ -261,7 +261,6 @@ xtreg lscrap d88 d89 grant grant_1, fe
 ```
 ![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
 
-*Dúvida*
 - Nosso modelo é significativo do ponto de vista global (Prob > F = 0.0001)
 - Controlado por outos fatores as taxas de descarte de 88 não são diferentes de em 89 estatiscamente falando
 - As taxas de descarte de 89, controlado por outros fatores, são menores do que em 89
@@ -344,7 +343,8 @@ estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho 
 Fazer nessa ordem ajuda na interpretação
 1) Breusch and Pagan Lagrangian multiplier test for random effects
 
-- Hipótese nula: var(ai) = 0 
+- Hipótese nula (H0): var(ai) = 0
+- Hipótese alternativa (H1): var(ai) ≠ 0
 - A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles
 
 ```R
@@ -364,7 +364,8 @@ xttest0
 
 > Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
 
-- Hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos.
+- Hipótese nula: Há igualdade de interceptos e inclinações para todos os "is"
+- Hipótese alternativa: Não há igualdade de interceptos e inclinações para todos os "is"
 - A rejeição da hipótese nula indica que os parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado.
 
 ```R
@@ -382,8 +383,9 @@ Primeiro teste sugeriu RE o segundo FE, nos dois casos a solução de agrupadame
 3) Teste de Hausman
 > Ele é usado para comparar modelos, para verificar se há diferença sistemática nos parâmentros estimados entre os modelos, com o o bjetivo deselecionar o modelo mais parcimonioso.
 
-- Hipótese nula: Diferença nos coeficientes não é sistemática
-- A rejeição da hipótese nula indica que a especificação correta é FE
+- Hipótese nula: Diferença nos coeficientes não é sistemática -> EA é consistente (heterogeneidade aleatória)
+- Hipótese alternativa: Diferença nos coeficientes é sistemática -> EA não é consistente (homogeneidade aleatória)
+- A rejeição da hipótese nula indica que FE é melhor que RE
 
 ```R
 # Etapa 1 -> Estimar com o Efeito Fixo
