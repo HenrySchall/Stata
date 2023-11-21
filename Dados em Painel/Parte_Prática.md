@@ -364,8 +364,8 @@ xttest0
 
 > Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
 
-- Hipótese nula: Há igualdade de interceptos e inclinações para todos os "is"
-- Hipótese alternativa: Não há igualdade de interceptos e inclinações para todos os "is"
+- Hipótese nula (H0): Há igualdade de interceptos e inclinações para todos os "is"
+- Hipótese alternativa (H1): Não há igualdade de interceptos e inclinações para todos os "is"
 - A rejeição da hipótese nula indica que os parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado.
 
 ```R
@@ -383,8 +383,8 @@ Primeiro teste sugeriu RE o segundo FE, nos dois casos a solução de agrupadame
 3) Teste de Hausman
 > Ele é usado para comparar modelos, para verificar se há diferença sistemática nos parâmentros estimados entre os modelos, com o o bjetivo deselecionar o modelo mais parcimonioso.
 
-- Hipótese nula: Diferença nos coeficientes não é sistemática -> EA é consistente (heterogeneidade aleatória)
-- Hipótese alternativa: Diferença nos coeficientes é sistemática -> EA não é consistente (homogeneidade aleatória)
+- Hipótese nula (H0): Diferença nos coeficientes não é sistemática -> EA é consistente (heterogeneidade aleatória)
+- Hipótese alternativa (H1): Diferença nos coeficientes é sistemática -> EA não é consistente (homogeneidade aleatória)
 - A rejeição da hipótese nula indica que FE é melhor que RE
 
 ```R
