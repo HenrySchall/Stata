@@ -49,7 +49,7 @@ smcity|.1830768|0.259
 _cons|-8.487543|
 
 - educ = É significativa e possui efeito *negativo* na variável dependente, ou seja, mulheres mais educadas, controlado
-pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. **DÚVIDA** interpretacaoesta correta?
+pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. 
 - age = É significativa e possui efeito *positivo* na variável dependente, controlado pelos outros fatores
 - age2 = É significativa e possui efeito negativo na variável dependente, controlado pelos outros fatores
 - black = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
