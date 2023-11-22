@@ -264,7 +264,7 @@ xtreg lscrap d88 d89 grant grant_1, fe
 
 - Nosso modelo é significativo do ponto de vista global (Prob > F = 0.0001)
 - Controlado por outos fatores as taxas de descarte de 88 não são diferentes de em 89 estatiscamente falando
-- As taxas de descarte de 89, controlado por outros fatores, são menores do que em 89
+- As taxas de descarte de 88, controlado por outros fatores, são menores do que em 89
 - Subsídios, controlado por outros fatores, reduz a taxa de descarte
 - Controladas por outros fatores, os subsidios diminuem as taxas de descarte
 
