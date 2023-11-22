@@ -50,11 +50,11 @@ _cons|-8.487543|
 
 - educ = É significativa e possui efeito *negativo* na variável dependente, ou seja, mulheres mais educadas, controlado
 pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. 
-- age = É significativa e possui efeito *positivo* na variável dependente, controlado pelos outros fatores
-- age2 = É significativa e possui efeito negativo na variável dependente, controlado pelos outros fatores
-- black = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
-- east = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
-- northcen = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
+- age = É significativa e possui efeito *positivo* na variável dependente
+- age2 = É significativa e possui efeito negativo na variável dependente
+- black = É significativa e possui efeito positivo na variável dependente
+- east = É significativa e possui efeito positivo na variável dependente
+- northcen = É significativa e possui efeito positivo na variável dependente
 - west = Não é significativa
 - farm = Não é significativa
 - othrural = Não é significativa
