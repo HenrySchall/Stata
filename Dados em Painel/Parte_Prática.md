@@ -179,6 +179,7 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 
 #### 4) Quarto Exemplo
 Carregar Base -> INJURY.DTA
+
 Resumo base: Em julho de 80 havia um limite para recebimento de auxilio compensação por acidente de trabalho, em relação a renda dos indivíduos, sendo que indivíudos com renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
 
 ```R
