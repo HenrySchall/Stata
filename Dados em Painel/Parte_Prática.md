@@ -363,7 +363,7 @@ xttest0
 
 2) Teste F de Chow (Teste de igualdade de interceptos e inclinações do POLS).
 
-> Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
+> Ele estima uma equação auxiliar, em que se analisa o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indivíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parâmetros forem em conjunto estatisticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
 
 - Hipótese nula (H0): Há igualdade de interceptos e inclinações para todos os "is"
 - Hipótese alternativa (H1): Não há igualdade de interceptos e inclinações para todos os "is"
