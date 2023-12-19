@@ -49,12 +49,12 @@ smcity|.1830768|0.259
 _cons|-8.487543|
 
 - educ = É significativa e possui efeito *negativo* na variável dependente, ou seja, mulheres mais educadas, controlado
-pelas outras variáveis, tem menos filhos ou o aumento de 1 ano de educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. **DÚVIDA** interpretacaoesta correta?
-- age = É significativa e possui efeito *positivo* na variável dependente, controlado pelos outros fatores
-- age2 = É significativa e possui efeito negativo na variável dependente, controlado pelos outros fatores
-- black = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
-- east = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
-- northcen = É significativa e possui efeito positivo na variável dependente, controlado pelos outros fatores
+pelas outras variáveis, tem menos filhos ou o aumento de uma unidade na variável educação, controlado pelos outros fatores, levá a uma diminuição de 14,28% nos níveis de fecundidade. 
+- age = É significativa e possui efeito *positivo* na variável dependente
+- age2 = É significativa e possui efeito negativo na variável dependente
+- black = É significativa e possui efeito positivo na variável dependente
+- east = É significativa e possui efeito positivo na variável dependente
+- northcen = É significativa e possui efeito positivo na variável dependente
 - west = Não é significativa
 - farm = Não é significativa
 - othrural = Não é significativa
@@ -179,6 +179,7 @@ reg rprice y81 nearinc y81nrinc age agesq intst land area rooms baths
 
 #### 4) Quarto Exemplo
 Carregar Base -> INJURY.DTA
+
 Resumo base: Em julho de 80 havia um limite para recebimento de auxilio compensação por acidente de trabalho, em relação a renda dos indivíduos, sendo que indivíudos com renda superior ao limite, não recebiam compensação. Após julho de 80, esse limite foi elevado. Qual será o impacto da mudança?
 
 ```R
@@ -261,10 +262,9 @@ xtreg lscrap d88 d89 grant grant_1, fe
 ```
 ![1212343](https://github.com/HenrySchall/Stata/assets/96027335/9b67a60e-00a6-4fbd-92f7-c0259b61a83c)
 
-*Dúvida*
 - Nosso modelo é significativo do ponto de vista global (Prob > F = 0.0001)
 - Controlado por outos fatores as taxas de descarte de 88 não são diferentes de em 89 estatiscamente falando
-- As taxas de descarte de 89, controlado por outros fatores, são menores do que em 89
+- As taxas de descarte de 88, controlado por outros fatores, são menores do que em 89
 - Subsídios, controlado por outros fatores, reduz a taxa de descarte
 - Controladas por outros fatores, os subsidios diminuem as taxas de descarte
 
@@ -344,7 +344,8 @@ estimates table OLS FE RE, b se t stats(N r2 r2_o r2_b r2_w sigma_u sigma_e rho 
 Fazer nessa ordem ajuda na interpretação
 1) Breusch and Pagan Lagrangian multiplier test for random effects
 
-- Hipótese nula: var(ai) = 0 
+- Hipótese nula (H0): var(ai) = 0
+- Hipótese alternativa (H1): var(ai) ≠ 0
 - A rejeição da hipótese nula indica que MQO agrupado não é o modelo apropriado, pois a estrutura de variabilidade dos erros compostos é sigma2. RE é escolha entre eles
 
 ```R
@@ -362,9 +363,10 @@ xttest0
 
 2) Teste F de Chow (Teste de igualdade de interceptos e inclinações do POLS).
 
-> Ele estima uma equação auxiliar, em que análisa-se o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indvíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parametros forem em conjunto estatísticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
+> Ele estima uma equação auxiliar, em que se analisa o efeito de um variável explicativa, influenciando a variável dependente, de modo diferente para cada indivíduo, ou seja, é como se eu cria-se uma dummy para cada indivíduo e multiplicasse pela variável explicativa selecionada e ao realizar um teste de hipótese em conjunto (teste de Chow), se os parâmetros forem em conjunto estatisticamente significativos, não há igualdade entre os interceptos, então há efeitos específicos para cada indivíduo.
 
-- Hipótese nula: Há igualdade de interceptos e inclinações para todos os indivíduos.
+- Hipótese nula (H0): Há igualdade de interceptos e inclinações para todos os "is"
+- Hipótese alternativa (H1): Não há igualdade de interceptos e inclinações para todos os "is"
 - A rejeição da hipótese nula indica que os parâmetros são diferentes entre indivíduos, desta forma FE é preferível à MQO Agrupado.
 
 ```R
@@ -382,8 +384,9 @@ Primeiro teste sugeriu RE o segundo FE, nos dois casos a solução de agrupadame
 3) Teste de Hausman
 > Ele é usado para comparar modelos, para verificar se há diferença sistemática nos parâmentros estimados entre os modelos, com o o bjetivo deselecionar o modelo mais parcimonioso.
 
-- Hipótese nula: Diferença nos coeficientes não é sistemática
-- A rejeição da hipótese nula indica que a especificação correta é FE
+- Hipótese nula (H0): Diferença nos coeficientes não é sistemática -> EA é consistente (heterogeneidade aleatória)
+- Hipótese alternativa (H1): Diferença nos coeficientes é sistemática -> EA não é consistente (homogeneidade aleatória)
+- A rejeição da hipótese nula indica que FE é melhor que RE
 
 ```R
 # Etapa 1 -> Estimar com o Efeito Fixo
