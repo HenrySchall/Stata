@@ -4,6 +4,8 @@ Stata é um programa de estatístico closed source, criador foi William W. Gould
 A StataCorp desenvolve melhorias de software, gerencia os serviços associados à treinamento, suporte técnico, publicações e reuniões anuais de usuários. Ela passou a ser usado particularmente ppor comunidades científicas, em todo o mundo, devido a sua facilidade
 de aprendizado e sua riqueza de modelos estatísticos. 
 
+Download: https://www.dropbox.com/scl/fo/8rxhtmsfzg14nw3b8sfru/h?rlkey=6pxmanwu7btncfkv9sngffro3&dl=0
+
 ### Estatística
 A estatística é a ciência que objetiva coletar, organizar, analisar e interpretar dados. Ela é dividida em 3 partes: **Descritiva, Inferencial e Probabilística.**
 
