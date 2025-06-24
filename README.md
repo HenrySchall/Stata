@@ -11,8 +11,8 @@
 > We can say that Panel Data is subdivided into two types: True Panel and Cross-Section Clustering. When we have a True Panel, the same unit of analysis is used over time (all the "i"s are the same), that is, in a survey, for example, the data will be about the same individuals over time. In a Cross-Section Clustering, the "i"s will not be the same between periods, that is, in a survey the data will not be about the same individuals.
 
 ### Panel Data Models
-1) Pooled Cross Section Panel
-2) True Panel
+1) Pooled Cross Section
+2) Panel Data
    - Fixed Effects Model (FE)
    - Random Effects Model (RE)
    - Dynamic Effects Model (GMM)
