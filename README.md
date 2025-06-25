@@ -25,3 +25,5 @@ $Yit = \beta0 + + \beta1Xit + \beta2Xit + eit$
 
 ### Repository Bibliographic References:
 - Econometric Analysis of Cross Section and Panel Data, Second Edition, by Jeffrey M. Wooldridge
+https://www.youtube.com/watch?v=fv5HLjmtkGU
+https://core.ac.uk/download/pdf/6379375.pdf
