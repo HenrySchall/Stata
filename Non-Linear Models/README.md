@@ -5,7 +5,7 @@
 
 # Non-Linear_Models
 
-![Img](https://github.com/user-attachments/assets/d2359140-cbd9-4151-af06-0b8d2c3bbf3d)
+![Img](https://github.com/user-attachments/assets/a261fa1a-9117-4540-8fb7-cffa2461177f)
 
 <!-- BADGES -->
 <img src="https://img.shields.io/github/license/HenrySchall/Artificial_Intelligence?style=flat&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
